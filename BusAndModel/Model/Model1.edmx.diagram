@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8093c568d66541dc824628dcd8cc4021" Name="Diagram1" ZoomLevel="74" >
+      <Diagram DiagramId="8093c568d66541dc824628dcd8cc4021" Name="Diagram1" ZoomLevel="97" >
         <EntityTypeShape EntityType="Model1.Tour" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="Model1.LoaiDL" Width="1.5" PointX="12.125" PointY="2.625" />
         <EntityTypeShape EntityType="Model1.GiaTour" Width="1.5" PointX="9.75" PointY="0.5" />
@@ -16,15 +16,18 @@
         <EntityTypeShape EntityType="Model1.CTTour" Width="1.5" PointX="7.125" PointY="0.625" />
         <AssociationConnector Association="Model1.TourCTTour" />
         <AssociationConnector Association="Model1.DiaDiemCTTour" />
-        <EntityTypeShape EntityType="Model1.KhachHang" Width="1.5" PointX="6.75" PointY="3.5" />
+        <EntityTypeShape EntityType="Model1.KhachHang" Width="1.5" PointX="7" PointY="3.5" />
         <EntityTypeShape EntityType="Model1.DoanKhach" Width="1.5" PointX="3.125" PointY="3.75" />
-        <EntityTypeShape EntityType="Model1.NhiemVu" Width="1.5" PointX="0.5" PointY="2.625" />
+        <EntityTypeShape EntityType="Model1.NhiemVu" Width="1.5" PointX="0.5" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.DSKhachTheoDoan" Width="1.5" PointX="5" PointY="3.5" />
         <AssociationConnector Association="Model1.DoanKhachDSKhachTheoDoan" />
         <AssociationConnector Association="Model1.KhachHangDSKhachTheoDoan" />
         <EntityTypeShape EntityType="Model1.NhanVien" Width="1.5" PointX="0.5" PointY="4.375" />
-        <EntityTypeShape EntityType="Model1.NhanVienTheoDoan" Width="1.5" PointX="0.625" PointY="6.375" />
+        <EntityTypeShape EntityType="Model1.NhanVienTheoDoan" Width="1.5" PointX="1.125" PointY="6.375" />
         <AssociationConnector Association="Model1.TourDoanKhach" />
+        <AssociationConnector Association="Model1.NhanVienNhanVienTheoDoan" />
+        <AssociationConnector Association="Model1.NhiemVuNhanVienTheoDoan" />
+        <AssociationConnector Association="Model1.NhanVienTheoDoanDoanKhach" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

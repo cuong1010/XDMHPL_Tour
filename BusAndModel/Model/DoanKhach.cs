@@ -18,6 +18,7 @@ namespace BusAndModel.Model
         public DoanKhach()
         {
             this.DSKhachTheoDoans = new HashSet<DSKhachTheoDoan>();
+            this.NhanVienTheoDoan = new HashSet<NhanVienTheoDoan>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace BusAndModel.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DSKhachTheoDoan> DSKhachTheoDoans { get; set; }
         public virtual Tour Tour { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVienTheoDoan> NhanVienTheoDoan { get; set; }
     }
 }

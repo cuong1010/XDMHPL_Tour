@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/23/2017 07:46:46
--- Generated from EDMX file: C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\BusAndModel\Model\Model1.edmx
+-- Date Created: 12/24/2017 14:27:56
+-- Generated from EDMX file: C:\Users\MyPC\Documents\XDMHPL_Tour\BusAndModel\Model\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [QLTour];
+USE [QLtour];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,11 +17,71 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_DiaDiemCTTour]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CTTours] DROP CONSTRAINT [FK_DiaDiemCTTour];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DoanKhachDSKhachTheoDoan]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DSKhachTheoDoans] DROP CONSTRAINT [FK_DoanKhachDSKhachTheoDoan];
+GO
+IF OBJECT_ID(N'[dbo].[FK_KhachHangDSKhachTheoDoan]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DSKhachTheoDoans] DROP CONSTRAINT [FK_KhachHangDSKhachTheoDoan];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LoaiDLTour]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tours] DROP CONSTRAINT [FK_LoaiDLTour];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TinhThanhDiaDiem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DiaDiems] DROP CONSTRAINT [FK_TinhThanhDiaDiem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TourCTTour]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CTTours] DROP CONSTRAINT [FK_TourCTTour];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TourDoanKhach]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DoanKhaches] DROP CONSTRAINT [FK_TourDoanKhach];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TourGiaTour]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GiaTours] DROP CONSTRAINT [FK_TourGiaTour];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[CTTours]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CTTours];
+GO
+IF OBJECT_ID(N'[dbo].[DiaDiems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DiaDiems];
+GO
+IF OBJECT_ID(N'[dbo].[DoanKhaches]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DoanKhaches];
+GO
+IF OBJECT_ID(N'[dbo].[DSKhachTheoDoans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DSKhachTheoDoans];
+GO
+IF OBJECT_ID(N'[dbo].[GiaTours]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GiaTours];
+GO
+IF OBJECT_ID(N'[dbo].[KhachHangs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KhachHangs];
+GO
+IF OBJECT_ID(N'[dbo].[LoaiDLs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LoaiDLs];
+GO
+IF OBJECT_ID(N'[dbo].[NhanViens]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NhanViens];
+GO
+IF OBJECT_ID(N'[dbo].[NhanVienTheoDoans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NhanVienTheoDoans];
+GO
+IF OBJECT_ID(N'[dbo].[NhiemVus]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NhiemVus];
+GO
+IF OBJECT_ID(N'[dbo].[TinhThanhs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TinhThanhs];
+GO
+IF OBJECT_ID(N'[dbo].[Tours]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tours];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -331,6 +391,51 @@ GO
 CREATE INDEX [IX_FK_TourDoanKhach]
 ON [dbo].[DoanKhaches]
     ([TourId]);
+GO
+
+-- Creating foreign key on [idNhanVien] in table 'NhanVienTheoDoans'
+ALTER TABLE [dbo].[NhanVienTheoDoans]
+ADD CONSTRAINT [FK_NhanVienNhanVienTheoDoan]
+    FOREIGN KEY ([idNhanVien])
+    REFERENCES [dbo].[NhanViens]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_NhanVienNhanVienTheoDoan'
+CREATE INDEX [IX_FK_NhanVienNhanVienTheoDoan]
+ON [dbo].[NhanVienTheoDoans]
+    ([idNhanVien]);
+GO
+
+-- Creating foreign key on [idNhiemVu] in table 'NhanVienTheoDoans'
+ALTER TABLE [dbo].[NhanVienTheoDoans]
+ADD CONSTRAINT [FK_NhiemVuNhanVienTheoDoan]
+    FOREIGN KEY ([idNhiemVu])
+    REFERENCES [dbo].[NhiemVus]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_NhiemVuNhanVienTheoDoan'
+CREATE INDEX [IX_FK_NhiemVuNhanVienTheoDoan]
+ON [dbo].[NhanVienTheoDoans]
+    ([idNhiemVu]);
+GO
+
+-- Creating foreign key on [idDoanKhach] in table 'NhanVienTheoDoans'
+ALTER TABLE [dbo].[NhanVienTheoDoans]
+ADD CONSTRAINT [FK_NhanVienTheoDoanDoanKhach]
+    FOREIGN KEY ([idDoanKhach])
+    REFERENCES [dbo].[DoanKhaches]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_NhanVienTheoDoanDoanKhach'
+CREATE INDEX [IX_FK_NhanVienTheoDoanDoanKhach]
+ON [dbo].[NhanVienTheoDoans]
+    ([idDoanKhach]);
 GO
 
 -- --------------------------------------------------
