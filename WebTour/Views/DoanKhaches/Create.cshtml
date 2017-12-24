@@ -1,0 +1,79 @@
+﻿@using BusAndModel.Model
+@model DoanKhach
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<h2>Đăng Ký Đoàn Khách Mới</h2>
+
+
+@using (Html.BeginForm("Create", "DoanKhaches", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="box-header with-border">
+        <h3 class="box-title">Thêm thông tin đoàn khách</h3>
+        <div class="box-tools pull-right">
+            <button type="submit" class="btn btn-box-tool">
+                <i class="fa fa-check" style="font-size:16px"></i>
+            </button>
+            <span class="btn btn-box-tool" onclick="location.href='/KhachHangs/Index'">
+                <i class="fa fa-times" style="font-size:16px"></i>
+            </span>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            
+            @Html.AntiForgeryToken()
+            <!-------------------------------------COL12------------------------------------>
+            <div class="col-md-12">
+                <div class="form-group minHeight80">
+                    <label>Tour</label>
+                   @Html.DropDownList("TourId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group minHeight80">
+                    <label>Tên Đoàn</label>
+                    @Html.EditorFor(model => model.TenGoi, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Nhập tên đoàn..." } })
+                    @Html.ValidationMessageFor(model => model.TenGoi, "", new { @class = "text-danger" })
+                </div>
+               
+                <div class="form-group">
+                    <label>Ngày bắt đầu</label>
+                    <div class="input-group date" id='datetimepicker1'>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        @Html.EditorFor(model => model.NgayKhoiHanh, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.NgayKhoiHanh, "", new { @class = "text-danger" })
+                        
+                    </div>
+                    <div><b class="text-danger">@ViewBag.error</b></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Ngày Kết thúc</label>
+                    <div class="input-group date" id='datetimepicker2'>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
+
+
+                        @Html.ValidationMessageFor(model => model.NgayKetThuc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group minHeight80">
+                    <label>Số lượng cho phép</label>
+                    @Html.EditorFor(model => model.SLCho, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Nhập số lượng..." } })
+                    @Html.ValidationMessageFor(model => model.SLCho, "", new { @class = "text-danger" })
+                </div>
+                
+
+
+            </div>
+        </div>
+    </div>
+}

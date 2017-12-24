@@ -18,5 +18,9 @@ namespace BusAndModel.Model
         public int idNhiemVu { get; set; }
         public int idNhanVien { get; set; }
         public int idDoanKhach { get; set; }
+    
+        public virtual NhanVien NhanVien { get; set; }
+        public virtual NhiemVu NhiemVu { get; set; }
+        public virtual DoanKhach DoanKhaches { get; set; }
     }
 }
