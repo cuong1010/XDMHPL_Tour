@@ -1,1 +1,15 @@
 C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\WinTour.exe.config
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\WinTour.exe
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\WinTour.pdb
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\BusAndModel.dll
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\EntityFramework.dll
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\BusAndModel.pdb
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\EntityFramework.xml
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.csprojResolveAssemblyReference.cache
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.Form1.resources
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.Properties.Resources.resources
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.csproj.GenerateResource.Cache
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.exe
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.pdb
