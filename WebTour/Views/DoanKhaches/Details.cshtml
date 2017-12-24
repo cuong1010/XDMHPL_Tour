@@ -1,0 +1,117 @@
+﻿@model WebTour.Models.DoanKhachViewModel
+
+@{
+    ViewBag.Title = "Chi Tiết Đoàn Khách";
+}
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3>Chi Tiết Đoàn Khách</h3>
+    </div>
+    <div class="box-body">
+        <div class="col-sm-12">
+            <label>Tình Trạng: 
+            @if (Model.ngayKhoiHanh.Date < DateTime.Now.Date)
+            {
+                <b class="text-info">Chưa khởi Hành</b>
+            }else if(Model.ngayKetThuc.Date<DateTime.Now.Date)
+            {
+                <b class="text-danger">Đã Kết Thúc</b>
+            }else
+            {
+                <b class="text-info">Đang Đi</b>
+            }
+            </label>
+        </div>
+
+            <div class="col-sm-6">Ngày Khởi Hành: @Model.ngayKhoiHanh.ToShortDateString()</div>
+            <div class="col-sm-6">Ngày Kết Thúc: @Model.ngayKetThuc.ToShortDateString()</div>
+        <div class="col-sm-12">
+            <label>Số Lượng Còn Lại</label>
+            <input class="form-control"readonly="readonly" value="@Model.soluong"/>
+        </div>
+    </div>
+    <div class="box-header text-center">
+        <h4>Danh Sách Khách</h4>
+    </div>
+    <div class="box-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Họ và Tên</th>
+                    <th>CMND</th>
+                    <th>Địa Chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Giới tính</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.danhsachkhach)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.HoTen</td>
+                        <td>@item.CMND</td>
+                        <td>@item.DiaChi</td>
+                        <td>@item.SDT</td>
+                        @if (!item.GioiTinh)
+                        {
+                            <td>Nam</td>
+                        }
+                        else
+                        {
+                            <td>Nữ</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Họ và Tên</th>
+                    <th>CMND</th>
+                    <th>Địa Chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Giới tính</th>
+                </tr>
+            </tfoot>
+            </table>
+    </div>
+    <div class="box-header text-center">
+        <h4>Danh Sách Nhân Viên</h4>
+        <div class="box-tools pull-right">
+            <span class="btn btn-box-tool" onclick="location.href='/NhanViens/PhanCong/@Model.maDoan'">
+                <i class="fa fa-plus" style="font-size:16px">Thêm Đoàn</i>
+            </span>
+        </div>
+    </div>
+    <div class="box-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Họ Tên Nhân Viên</th>
+                    <th>Chức Vụ</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.nhanvien)
+                {
+                    <tr>
+                        <td>@item.tenNV</td>
+                        <td>@item.ChucVu</td>
+                       
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Họ Tên Nhân Viên</th>
+                    <th>Chức Vụ</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

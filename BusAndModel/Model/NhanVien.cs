@@ -14,7 +14,16 @@ namespace BusAndModel.Model
     
     public partial class NhanVien
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NhanVien()
+        {
+            this.NhanVienTheoDoans = new HashSet<NhanVienTheoDoan>();
+        }
+    
         public int Id { get; set; }
         public string TenNhanVien { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVienTheoDoan> NhanVienTheoDoans { get; set; }
     }
 }

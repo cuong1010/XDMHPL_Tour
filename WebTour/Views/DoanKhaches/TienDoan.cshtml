@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BusAndModel.Model.DoanKhach>
+
+@{
+    ViewBag.Title = "Danh sách đoàn khách";
+}
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3>Danh sách đoàn khách</h3>
+    </div>
+    <div class="box-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Mã Đoàn</th>
+                    <th>Tên Tour</th>
+                    <th>Tên Đoàn</th>
+                    <th>Ngày khởi hành</th>
+                    <th>Ngày Kết Thúc</th>
+                    <th>Tổng Tiền Khách Sạn</th>
+                    <th>Tổng Tiền Ăn</th>
+                    <th>Tổng Tiền Phương Tiện</th>
+                    <th>Tổng Tiền Khác</th>
+                    <th>Tổng Cộng</th>
+                    <th>Cập Nhật</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Tour.TenGoi</td>
+                        <td>@item.TenGoi</td>
+                        <td>@item.NgayKhoiHanh.ToShortDateString()</td>
+                        <td>@item.NgayKetThuc.ToShortDateString()</td>
+                        <td>@string.Format("{0:C}",@item.TongKS)</td>
+                        <td>@string.Format("{0:C}", @item.TongAn)</td>
+                        <td>@string.Format("{0:C}", @item.TongPT)</td>
+                        <td>@string.Format("{0:C}", @item.TongKhac)</td>
+                        @{
+
+                            var tong = item.TongAn.Value+item.TongKhac.Value+item.TongKS.Value+item.TongPT.Value;
+                        }
+                        <td>@string.Format("{0:C}", @tong)</td>
+
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Edit/'+@item.Id">
+                                <i class="fa fa-edit" style="font-size:15px"></i>
+                            </button>
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Mã Đoàn</th>
+                    <th>Tên Tour</th>
+                    <th>Tên Đoàn</th>
+                    <th>Thông tin Tour</th>
+                    <th>Số lượng còn lại</th>
+                    <th>Đăng ký khách</th>
+
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
