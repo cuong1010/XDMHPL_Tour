@@ -20,11 +20,14 @@ namespace WinTour
         Database db = new Database();
         private void Form1_Load(object sender, EventArgs e)
         {
-            refeshTinh();
-            refeshDD();
+            //refeshTinh();
+            //refeshDD();
         }
+
         List<TinhThanh> dstinh = new List<TinhThanh>();
         List<DiaDiem> dsdiadiem = new List<DiaDiem>();
+        List<LoaiDL> dsloaidl = new List<LoaiDL>();
+        List<CTTour> cttour = new List<CTTour>();
         void refeshTinh()
         {
             GridTinhThanh.Rows.Clear();
@@ -57,10 +60,7 @@ namespace WinTour
                 }
             }
         }
-        private void tabCauhinh_Enter(object sender, EventArgs e)
-        {
-            
-        }
+        #region tabCauHinh
 
         #region CauHinhTinhThanh
         private void btnThemTinh_Click(object sender, EventArgs e)
@@ -90,17 +90,6 @@ namespace WinTour
         #endregion
 
         #region cauhinhdiadiem
-        private void cbTinhThanh_Click(object sender, EventArgs e)
-        {
-            cbTinhThanh.Items.Clear();
-            if (dstinh[dstinh.Count - 1] != null)
-            {
-                foreach (var i in dstinh)
-                {
-                    cbTinhThanh.Items.Add(i.TenTinh);
-                }
-            }
-        }
 
         private void txtThemDD_Click(object sender, EventArgs e)
         {
@@ -111,7 +100,6 @@ namespace WinTour
             else MessageBox.Show("Thêm thất bại");
             refeshDD();
         }
-
         private void txtSuaDD_Click(object sender, EventArgs e)
         {
             int i = GridDD.CurrentRow.Index;
@@ -132,9 +120,52 @@ namespace WinTour
         }
         private void tabDD_Enter(object sender, EventArgs e)
         {
-            refeshDD();
+            cbTinhThanh.Items.Clear();
+            if (dstinh[dstinh.Count - 1] != null)
+            {
+                foreach (var i in dstinh)
+                {
+                    cbTinhThanh.Items.Add(i.TenTinh);
+                }
+            }
         }
         #endregion
-       
+
+        #endregion
+        private void tabTour_Enter(object sender, EventArgs e)
+        {
+            refeshTinh();
+            refeshDD();
+            // load ds tỉnh thành
+            cbDSTinhTour.Items.Clear();
+            foreach (var i in dstinh)
+            {
+                cbDSTinhTour.Items.Add(i.TenTinh);
+            }
+            //load ds loại DL
+            dsloaidl = (List<LoaiDL>)db.Laytatcathongtin("LoaiDLs");
+            if (dsloaidl[dsloaidl.Count-1]!=null)
+            foreach (var i in dsloaidl)
+            {
+                cbLoaiDL.Items.Add(i.TenGoi);
+            }
+        }
+
+        private void cbDSTinhTour_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbDSDDTuor.Items.Clear();
+            int vttinh = cbDSTinhTour.SelectedIndex;
+            foreach (var i in dstinh[vttinh].DiaDiems)
+                cbDSDDTuor.Items.Add(i.TenDiaDiem);
+            //foreach (var i in dsdiadiem)
+            //    if (i.TinhThanh.TenTinh.Equals(dstinh[vttinh].TenTinh)) cbDSDDTuor.Items.Add(i.TenDiaDiem);
+        }
+
+        private void cbDSDDTuor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var row = new DataGridViewRow();
+            row.CreateCells(GridDDTour);
+            int stt = GridDDTour.RowCount + 1;
+        }
     }
 }
