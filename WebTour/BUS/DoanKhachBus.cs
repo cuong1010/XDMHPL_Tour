@@ -151,15 +151,15 @@ namespace BusAndModel.BUS
             }
 
         }
-        public List<NhanVienViewModel> getListNhanVien(int? id)
+        public List<ThongTinNhanVien> getListNhanVien(int? id)
         {
             try
             {
-                List<NhanVienViewModel> result = new List<NhanVienViewModel>();
+                List<ThongTinNhanVien> result = new List<ThongTinNhanVien>();
                 List<NhanVienTheoDoan> ds = db.NhanVienTheoDoans.Where(c => c.idDoanKhach == id).ToList();
                 foreach (NhanVienTheoDoan item in ds)
                 {
-                    NhanVienViewModel nv = new NhanVienViewModel();
+                    ThongTinNhanVien nv = new ThongTinNhanVien();
                     nv.tenNV = db.NhanViens.Find(item.idNhanVien).TenNhanVien;
                     nv.ChucVu = db.NhiemVus.Find(item.idNhiemVu).TenNhiemVu;
                     result.Add(nv);

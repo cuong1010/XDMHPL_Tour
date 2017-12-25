@@ -1,26 +1,61 @@
-﻿@model BusAndModel.Model.NhanVien
+﻿@model WebTour.Models.NhanVienViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi Tiết Nhân Viên";
 }
 
-<h2>Details</h2>
+<div class="box">
+    <div class="box-header text-center">
+        <h3>Chi Tiết Nhân Viên</h3>
+    </div>
+    <div class="box-body">
+        <div class="col-sm-12">
+            <label>
+                Tình Trạng:
+            </label>
+            <p class="btn-info form-control">@Model.TinhTrang</p>
+        </div>
+        <div class="col-sm-12">
+            <label>Tên Nhân Viên</label>
+            <b class="text-info">@Model.tenNV</b>
+        </div>
+    </div>
+    <div class="box-header text-center">
+        <h4>Lịch Sử Phân Công</h4>
+    </div>
+    <div class="box-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Tên Tour</th>
+                    <th>Tên Đoàn</th>
+                    <th>Ngày Bắt Đầu</th>
+                    <th>Ngày Kết Thúc</th>
+                    <th>Chức Vụ</th>
+                </tr>
+            </thead>
+            <tbody>
 
-<div>
-    <h4>NhanVien</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenNhanVien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenNhanVien)
-        </dd>
-
-    </dl>
+                @foreach (var item in Model.PhanCong)
+                {
+                    <tr>
+                        <td>@item.TenTour</td>
+                        <td>@item.TenDoan</td>
+                        <td>@item.TuNgay.ToShortDateString()</td>
+                        <td>@item.DenNgay.ToShortDateString()</td>
+                        <td>@item.ChucVu</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Tên Tour</th>
+                    <th>Tên Đoàn</th>
+                    <th>Ngày Bắt Đầu</th>
+                    <th>Ngày Kết Thúc</th>
+                    <th>Chức Vụ</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
