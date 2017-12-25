@@ -13,3 +13,4 @@ C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj
 C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.csproj.GenerateResource.Cache
 C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.exe
 C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.pdb
+C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\WinTour\obj\Debug\WinTour.frmGiaTour.resources

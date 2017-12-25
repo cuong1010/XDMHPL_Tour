@@ -40,6 +40,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.GridDDTour = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtGiaTour = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -49,8 +53,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtTenTour = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnTao = new System.Windows.Forms.Button();
+            this.tabXemTour = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.listTrinhTuThamQuan = new System.Windows.Forms.ListBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.listTour = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabCauhinh = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -74,10 +85,14 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtThemDD = new System.Windows.Forms.Button();
             this.txtTenDD = new System.Windows.Forms.TextBox();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.lbTenTour = new System.Windows.Forms.Label();
+            this.lbLoaiDL = new System.Windows.Forms.Label();
+            this.lbDacDiem = new System.Windows.Forms.Label();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnGia = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabTour.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -85,12 +100,15 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridDDTour)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.tabXemTour.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabCauhinh.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridTinhThanh)).BeginInit();
             this.tabDD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridDD)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -119,7 +137,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabXemTour);
             this.tabControl1.Location = new System.Drawing.Point(7, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -131,13 +149,13 @@
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.btnTao);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(476, 365);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Tạo tour";
             // 
             // groupBox2
             // 
@@ -232,6 +250,34 @@
             this.GridDDTour.Name = "GridDDTour";
             this.GridDDTour.Size = new System.Drawing.Size(395, 129);
             this.GridDDTour.TabIndex = 25;
+            this.GridDDTour.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDDTour_CellClick);
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "STT";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 50;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Tỉnh thành";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Địa điểm";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 130;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Hủy";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 70;
             // 
             // groupBox1
             // 
@@ -322,24 +368,105 @@
             this.txtTenTour.Size = new System.Drawing.Size(150, 20);
             this.txtTenTour.TabIndex = 22;
             // 
-            // button1
+            // btnTao
             // 
-            this.button1.Location = new System.Drawing.Point(385, 334);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnTao.Location = new System.Drawing.Point(385, 334);
+            this.btnTao.Name = "btnTao";
+            this.btnTao.Size = new System.Drawing.Size(75, 23);
+            this.btnTao.TabIndex = 8;
+            this.btnTao.Text = "Tạo";
+            this.btnTao.UseVisualStyleBackColor = true;
+            this.btnTao.Click += new System.EventHandler(this.btnTao_Click);
             // 
-            // tabPage3
+            // tabXemTour
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(476, 365);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabXemTour.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabXemTour.Controls.Add(this.groupBox3);
+            this.tabXemTour.Controls.Add(this.listTour);
+            this.tabXemTour.Location = new System.Drawing.Point(4, 22);
+            this.tabXemTour.Name = "tabXemTour";
+            this.tabXemTour.Padding = new System.Windows.Forms.Padding(3);
+            this.tabXemTour.Size = new System.Drawing.Size(476, 365);
+            this.tabXemTour.TabIndex = 1;
+            this.tabXemTour.Text = "Xem Tour";
+            this.tabXemTour.Enter += new System.EventHandler(this.tabXemTour_Enter);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox3.Controls.Add(this.btnGia);
+            this.groupBox3.Controls.Add(this.btnSua);
+            this.groupBox3.Controls.Add(this.lbDacDiem);
+            this.groupBox3.Controls.Add(this.lbLoaiDL);
+            this.groupBox3.Controls.Add(this.lbTenTour);
+            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Location = new System.Drawing.Point(150, 15);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(320, 342);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Thông tin tour";
+            // 
+            // listTrinhTuThamQuan
+            // 
+            this.listTrinhTuThamQuan.FormattingEnabled = true;
+            this.listTrinhTuThamQuan.Location = new System.Drawing.Point(16, 19);
+            this.listTrinhTuThamQuan.Name = "listTrinhTuThamQuan";
+            this.listTrinhTuThamQuan.Size = new System.Drawing.Size(237, 147);
+            this.listTrinhTuThamQuan.TabIndex = 2;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.Red;
+            this.label13.Location = new System.Drawing.Point(22, 110);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Giá tour";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(22, 52);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(44, 13);
+            this.label14.TabIndex = 34;
+            this.label14.Text = "Loại DL";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(22, 79);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 13);
+            this.label15.TabIndex = 32;
+            this.label15.Text = "Đặc điểm";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.Red;
+            this.label16.Location = new System.Drawing.Point(19, 26);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(47, 13);
+            this.label16.TabIndex = 31;
+            this.label16.Text = "Tên tour";
+            // 
+            // listTour
+            // 
+            this.listTour.FormattingEnabled = true;
+            this.listTour.Location = new System.Drawing.Point(6, 15);
+            this.listTour.Name = "listTour";
+            this.listTour.Size = new System.Drawing.Size(129, 342);
+            this.listTour.TabIndex = 0;
+            this.listTour.SelectedIndexChanged += new System.EventHandler(this.listTour_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -566,32 +693,89 @@
             this.txtTenDD.Size = new System.Drawing.Size(119, 20);
             this.txtTenDD.TabIndex = 14;
             // 
-            // Column3
+            // groupBox4
             // 
-            this.Column3.HeaderText = "STT";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 50;
+            this.groupBox4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox4.Controls.Add(this.btnDown);
+            this.groupBox4.Controls.Add(this.btnUp);
+            this.groupBox4.Controls.Add(this.listTrinhTuThamQuan);
+            this.groupBox4.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox4.Location = new System.Drawing.Point(6, 135);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(308, 174);
+            this.groupBox4.TabIndex = 40;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Trình tự tham quan";
             // 
-            // Column5
+            // btnUp
             // 
-            this.Column5.HeaderText = "Tỉnh thành";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
+            this.btnUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUp.ForeColor = System.Drawing.Color.Black;
+            this.btnUp.Location = new System.Drawing.Point(270, 58);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(32, 26);
+            this.btnUp.TabIndex = 3;
+            this.btnUp.Text = "^";
+            this.btnUp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // Column4
+            // btnDown
             // 
-            this.Column4.HeaderText = "Địa điểm";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 130;
+            this.btnDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDown.ForeColor = System.Drawing.Color.Black;
+            this.btnDown.Location = new System.Drawing.Point(270, 90);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(32, 26);
+            this.btnDown.TabIndex = 4;
+            this.btnDown.Text = "v";
+            this.btnDown.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
-            // Column6
+            // lbTenTour
             // 
-            this.Column6.HeaderText = "Hủy";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 70;
+            this.lbTenTour.AutoSize = true;
+            this.lbTenTour.Location = new System.Drawing.Point(118, 26);
+            this.lbTenTour.Name = "lbTenTour";
+            this.lbTenTour.Size = new System.Drawing.Size(0, 13);
+            this.lbTenTour.TabIndex = 41;
+            // 
+            // lbLoaiDL
+            // 
+            this.lbLoaiDL.AutoSize = true;
+            this.lbLoaiDL.Location = new System.Drawing.Point(118, 52);
+            this.lbLoaiDL.Name = "lbLoaiDL";
+            this.lbLoaiDL.Size = new System.Drawing.Size(0, 13);
+            this.lbLoaiDL.TabIndex = 42;
+            // 
+            // lbDacDiem
+            // 
+            this.lbDacDiem.AutoSize = true;
+            this.lbDacDiem.Location = new System.Drawing.Point(118, 79);
+            this.lbDacDiem.Name = "lbDacDiem";
+            this.lbDacDiem.Size = new System.Drawing.Size(0, 13);
+            this.lbDacDiem.TabIndex = 43;
+            // 
+            // btnSua
+            // 
+            this.btnSua.Location = new System.Drawing.Point(239, 315);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(75, 23);
+            this.btnSua.TabIndex = 44;
+            this.btnSua.Text = "Cập nhật";
+            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
+            // btnGia
+            // 
+            this.btnGia.Location = new System.Drawing.Point(110, 110);
+            this.btnGia.Name = "btnGia";
+            this.btnGia.Size = new System.Drawing.Size(74, 19);
+            this.btnGia.TabIndex = 45;
+            this.btnGia.Text = "Xem DS Giá";
+            this.btnGia.UseVisualStyleBackColor = true;
+            this.btnGia.Click += new System.EventHandler(this.btnGia_Click);
             // 
             // Form1
             // 
@@ -612,6 +796,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridDDTour)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabXemTour.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabCauhinh.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -620,6 +807,7 @@
             this.tabDD.ResumeLayout(false);
             this.tabDD.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridDD)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -651,8 +839,8 @@
         private System.Windows.Forms.TextBox txtTenDD;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btnTao;
+        private System.Windows.Forms.TabPage tabXemTour;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cbDSDDTuor;
         private System.Windows.Forms.Label label9;
@@ -676,6 +864,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewButtonColumn Column6;
+        private System.Windows.Forms.ListBox listTour;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ListBox listTrinhTuThamQuan;
+        private System.Windows.Forms.Label lbDacDiem;
+        private System.Windows.Forms.Label lbLoaiDL;
+        private System.Windows.Forms.Label lbTenTour;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnSua;
+        private System.Windows.Forms.Button btnGia;
     }
 }
 

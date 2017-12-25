@@ -20,14 +20,14 @@ namespace WinTour
         Database db = new Database();
         private void Form1_Load(object sender, EventArgs e)
         {
-            //refeshTinh();
-            //refeshDD();
         }
 
         List<TinhThanh> dstinh = new List<TinhThanh>();
         List<DiaDiem> dsdiadiem = new List<DiaDiem>();
         List<LoaiDL> dsloaidl = new List<LoaiDL>();
-        List<CTTour> cttour = new List<CTTour>();
+        List<CTTour> dscttour = new List<CTTour>();
+        List<Tour> dstour = new List<Tour>();
+        List<CTTour> dsthamquan = new List<CTTour>();
         void refeshTinh()
         {
             GridTinhThanh.Rows.Clear();
@@ -132,6 +132,8 @@ namespace WinTour
         #endregion
 
         #endregion
+
+        #region TaoTour
         private void tabTour_Enter(object sender, EventArgs e)
         {
             refeshTinh();
@@ -151,7 +153,6 @@ namespace WinTour
                 cbLoaiDL.Items.Add(i.TenGoi);
             }
         }
-
         private void cbDSTinhTour_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbDSDDTuor.Items.Clear();
@@ -160,7 +161,6 @@ namespace WinTour
                 cbDSDDTuor.Items.Add(i.TenDiaDiem);
            
         }
-
         private void cbDSDDTuor_SelectedIndexChanged(object sender, EventArgs e)
         {
             var row = new DataGridViewRow();
@@ -171,7 +171,128 @@ namespace WinTour
             row.Cells[1].Value = dstinh[vt].TenTinh;
             row.Cells[2].Value = dsdd[cbDSDDTuor.SelectedIndex].TenDiaDiem;
             row.Cells[3].Value = "Hủy";
+            CTTour ct = new CTTour();
+            ct.DiaDiemId= dsdd[cbDSDDTuor.SelectedIndex].Id;
+            dscttour.Add(ct);
             GridDDTour.Rows.Add(row);
         }
+        private void GridDDTour_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = GridDDTour.CurrentRow.Index;
+            if (Convert.ToBoolean(GridDDTour[3, row].Selected) == true)
+            {
+                dscttour.RemoveAt(row);
+                GridDDTour.Rows.RemoveAt(row);
+            }
+            for (int i = row; i < GridDDTour.Rows.Count; i++)
+            {
+                GridDDTour[0, i].Value = i + 1;
+            }
+        }
+        private void btnTao_Click(object sender, EventArgs e)
+        {
+            Tour tour = new Tour();
+            tour.TenGoi = txtTenTour.Text;
+            tour.DacDiem = txtDacDiem.Text;
+            tour.LoaiDLId = dsloaidl[cbLoaiDL.SelectedIndex].Id;var stt = 1;
+            foreach (var i in dscttour)
+            {
+                i.ThuTuThamQuan = stt;
+                tour.CTTours.Add(i);
+                stt++;
+            }
+            GiaTour gia = new GiaTour();
+            gia.Gia = Convert.ToInt32(txtGiaTour.Text);
+            gia.NgayCapNhat = DateTime.Now.Date;
+            tour.GiaTours.Add(gia);
+            if (db.Them(tour) > 0)
+            {
+                txtTenTour.Text = "";
+                txtDacDiem.Text = "";
+                txtGiaTour.Text = "";
+                MessageBox.Show("Tạo tour thành công");
+            }
+            else MessageBox.Show("Tạo tour thất bại");
+        }
+        #endregion
+
+        #region XemTour
+        private void tabXemTour_Enter(object sender, EventArgs e)
+        {
+            dstour = (List<Tour>)db.Laytatcathongtin("Tours");
+            foreach (var i in dstour)
+                listTour.Items.Add(i.TenGoi);
+        }
+
+        private void listTour_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            int i = listTour.SelectedIndex;
+            if (i >= 0)
+            {
+                lbTenTour.Text = dstour[i].TenGoi;
+                lbDacDiem.Text = dstour[i].DacDiem;
+                lbLoaiDL.Text = dstour[i].LoaiDL.TenGoi;
+                dsthamquan = dstour[i].CTTours.ToList();
+                listTrinhTuThamQuan.Items.Clear();           
+                foreach (var ct in dsthamquan)
+                {
+                    listTrinhTuThamQuan.Items.Add(ct.DiaDiem.TenDiaDiem+"".PadLeft(10)+"("+ ct.DiaDiem.TinhThanh.TenTinh + ")");                 
+                }
+                listTrinhTuThamQuan.SelectedIndex = 0;
+            }
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            int i = listTrinhTuThamQuan.SelectedIndex;
+            if (i > 0)
+            {
+                var temp = listTrinhTuThamQuan.Items[i];
+                listTrinhTuThamQuan.Items[i] = listTrinhTuThamQuan.Items[i - 1];
+                listTrinhTuThamQuan.Items[i - 1] = temp;
+                var temp2 = dsthamquan[i].DiaDiem;
+                dsthamquan[i].DiaDiem = dsthamquan[i - 1].DiaDiem;
+                dsthamquan[i - 1].DiaDiem = temp2;
+                listTrinhTuThamQuan.SelectedIndex = i-1;
+            }
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            int i = listTrinhTuThamQuan.SelectedIndex;
+            if (i < dsthamquan.Count-1)
+            {
+                var temp = listTrinhTuThamQuan.Items[i];
+                listTrinhTuThamQuan.Items[i] = listTrinhTuThamQuan.Items[i + 1];
+                listTrinhTuThamQuan.Items[i + 1] = temp;
+                var temp2 = dsthamquan[i].DiaDiem;
+                dsthamquan[i].DiaDiem = dsthamquan[i + 1].DiaDiem;
+                dsthamquan[i + 1].DiaDiem = temp2;
+                listTrinhTuThamQuan.SelectedIndex = i + 1;
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            bool flag = true;
+            Tour a = dstour[listTour.SelectedIndex];
+            for (int i = 0; i < dsthamquan.Count; i++)
+            {
+                a.CTTours.ToList()[i].DiaDiem = dsthamquan[i].DiaDiem;
+               
+            }
+                if (db.Sua(a) == 0) { flag = false; }
+            
+            if (flag)
+                MessageBox.Show("Cập nhật thành công");
+            else MessageBox.Show("Cập nhật thất bại");
+        }
+
+        private void btnGia_Click(object sender, EventArgs e)
+        {
+            new frmGiaTour(dstour[listTour.SelectedIndex]).ShowDialog();
+        }
+        #endregion
     }
 }
