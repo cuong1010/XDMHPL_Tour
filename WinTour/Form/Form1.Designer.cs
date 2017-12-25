@@ -70,13 +70,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.GridDD = new System.Windows.Forms.DataGridView();
-            this.txtThemDD = new System.Windows.Forms.Button();
-            this.txtTenDD = new System.Windows.Forms.TextBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtThemDD = new System.Windows.Forms.Button();
+            this.txtTenDD = new System.Windows.Forms.TextBox();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tabControl.SuspendLayout();
             this.tabTour.SuspendLayout();
@@ -225,8 +225,8 @@
             this.GridDDTour.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridDDTour.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
-            this.Column4,
             this.Column5,
+            this.Column4,
             this.Column6});
             this.GridDDTour.Location = new System.Drawing.Point(19, 67);
             this.GridDDTour.Name = "GridDDTour";
@@ -536,6 +536,19 @@
             this.GridDD.TabIndex = 16;
             this.GridDD.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDD_CellClick);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Tên";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Thuộc Tỉnh";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 90;
+            // 
             // txtThemDD
             // 
             this.txtThemDD.Location = new System.Drawing.Point(126, 126);
@@ -553,19 +566,6 @@
             this.txtTenDD.Size = new System.Drawing.Size(119, 20);
             this.txtTenDD.TabIndex = 14;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Tên";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Thuộc Tỉnh";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 90;
-            // 
             // Column3
             // 
             this.Column3.HeaderText = "STT";
@@ -573,18 +573,18 @@
             this.Column3.ReadOnly = true;
             this.Column3.Width = 50;
             // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Tỉnh thành";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
             // Column4
             // 
             this.Column4.HeaderText = "Địa điểm";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Width = 130;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Tỉnh thành";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
             // 
             // Column6
             // 
@@ -670,12 +670,12 @@
         private System.Windows.Forms.ComboBox cbDSTinhTour;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewButtonColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewButtonColumn Column6;
     }
 }
 

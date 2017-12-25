@@ -45,14 +45,26 @@
       <End Role="Tour" EntitySet="Tours" />
       <End Role="DoanKhach" EntitySet="DoanKhaches" />
     </AssociationSet>
+    <AssociationSet Name="NhanVienNhanVienTheoDoan" Association="Model1.NhanVienNhanVienTheoDoan">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="NhiemVuNhanVienTheoDoan" Association="Model1.NhiemVuNhanVienTheoDoan">
+      <End Role="NhiemVu" EntitySet="NhiemVus" />
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="NhanVienTheoDoanDoanKhach" Association="Model1.NhanVienTheoDoanDoanKhach">
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tour">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenGoi" Type="String" Nullable="false" />
-    <Property Name="DacDiem" Type="String" Nullable="false" />
+    <Property Name="TenGoi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DacDiem" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="LoaiDL" Relationship="Model1.LoaiDLTour" FromRole="Tour" ToRole="LoaiDL" />
     <Property Name="LoaiDLId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="GiaTours" Relationship="Model1.TourGiaTour" FromRole="Tour" ToRole="GiaTour" />
@@ -64,7 +76,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenGoi" Type="String" Nullable="false" />
+    <Property Name="TenGoi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Tours" Relationship="Model1.LoaiDLTour" FromRole="LoaiDL" ToRole="Tour" />
   </EntityType>
   <EntityType Name="GiaTour">
@@ -73,7 +85,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Gia" Type="Int32" Nullable="false" />
-    <Property Name="NgayCapNhat" Type="DateTime" Nullable="false" />
+    <Property Name="NgayCapNhat" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Tour" Relationship="Model1.TourGiaTour" FromRole="GiaTour" ToRole="Tour" />
     <Property Name="TourId" Type="Int32" Nullable="false" />
   </EntityType>
@@ -82,7 +94,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenDiaDiem" Type="String" Nullable="false" />
+    <Property Name="TenDiaDiem" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="TinhThanh" Relationship="Model1.TinhThanhDiaDiem" FromRole="DiaDiem" ToRole="TinhThanh" />
     <Property Name="TinhThanhId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CTTours" Relationship="Model1.DiaDiemCTTour" FromRole="DiaDiem" ToRole="CTTour" />
@@ -92,8 +104,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaTinh" Type="String" Nullable="false" />
-    <Property Name="TenTinh" Type="String" Nullable="false" />
+    <Property Name="MaTinh" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="TenTinh" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="DiaDiems" Relationship="Model1.TinhThanhDiaDiem" FromRole="TinhThanh" ToRole="DiaDiem" />
   </EntityType>
   <Association Name="TinhThanhDiaDiem">
@@ -141,6 +153,7 @@
     <Property Name="TourId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="DiaDiem" Relationship="Model1.DiaDiemCTTour" FromRole="CTTour" ToRole="DiaDiem" />
     <Property Name="DiaDiemId" Type="Int32" Nullable="false" />
+    <Property Name="ThuTuThamQuan" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="TourCTTour">
     <End Type="Model1.Tour" Role="Tour" Multiplicity="1" />
@@ -171,10 +184,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="HoTen" Type="String" Nullable="false" />
-    <Property Name="CMND" Type="String" Nullable="false" />
-    <Property Name="DiaChi" Type="String" Nullable="false" />
-    <Property Name="SDT" Type="String" Nullable="false" />
+    <Property Name="HoTen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CMND" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SDT" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="GioiTinh" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="DSKhachTheoDoans" Relationship="Model1.KhachHangDSKhachTheoDoan" FromRole="KhachHang" ToRole="DSKhachTheoDoan" />
   </EntityType>
@@ -183,9 +196,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenGoi" Type="String" Nullable="false" />
-    <Property Name="NgayKhoiHanh" Type="DateTime" Nullable="false" />
-    <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" />
+    <Property Name="TenGoi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="NgayKhoiHanh" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TongKS" Type="Int32" Nullable="true" />
     <NavigationProperty Name="DSKhachTheoDoans" Relationship="Model1.DoanKhachDSKhachTheoDoan" FromRole="DoanKhach" ToRole="DSKhachTheoDoan" />
     <Property Name="TongAn" Type="Int32" Nullable="true" />
@@ -194,13 +207,15 @@
     <NavigationProperty Name="Tour" Relationship="Model1.TourDoanKhach" FromRole="DoanKhach" ToRole="Tour" />
     <Property Name="TourId" Type="Int32" Nullable="false" />
     <Property Name="SLCho" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NhanVienTheoDoan" Relationship="Model1.NhanVienTheoDoanDoanKhach" FromRole="DoanKhach" ToRole="NhanVienTheoDoan" />
   </EntityType>
   <EntityType Name="NhiemVu">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenNhiemVu" Type="String" Nullable="false" />
+    <Property Name="TenNhiemVu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="NhanVienTheoDoans" Relationship="Model1.NhiemVuNhanVienTheoDoan" FromRole="NhiemVu" ToRole="NhanVienTheoDoan" />
   </EntityType>
   <EntityType Name="DSKhachTheoDoan">
     <Key>
@@ -241,7 +256,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenNhanVien" Type="String" Nullable="false" />
+    <Property Name="TenNhanVien" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="NhanVienTheoDoans" Relationship="Model1.NhanVienNhanVienTheoDoan" FromRole="NhanVien" ToRole="NhanVienTheoDoan" />
   </EntityType>
   <EntityType Name="NhanVienTheoDoan">
     <Key>
@@ -251,6 +267,9 @@
     <Property Name="idNhiemVu" Type="Int32" Nullable="false" />
     <Property Name="idNhanVien" Type="Int32" Nullable="false" />
     <Property Name="idDoanKhach" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NhanVien" Relationship="Model1.NhanVienNhanVienTheoDoan" FromRole="NhanVienTheoDoan" ToRole="NhanVien" />
+    <NavigationProperty Name="NhiemVu" Relationship="Model1.NhiemVuNhanVienTheoDoan" FromRole="NhanVienTheoDoan" ToRole="NhiemVu" />
+    <NavigationProperty Name="DoanKhaches" Relationship="Model1.NhanVienTheoDoanDoanKhach" FromRole="NhanVienTheoDoan" ToRole="DoanKhach" />
   </EntityType>
   <Association Name="TourDoanKhach">
     <End Type="Model1.Tour" Role="Tour" Multiplicity="1" />
@@ -261,6 +280,42 @@
       </Principal>
       <Dependent Role="DoanKhach">
         <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhanVienNhanVienTheoDoan">
+    <End Type="Model1.NhanVien" Role="NhanVien" Multiplicity="1" />
+    <End Type="Model1.NhanVienTheoDoan" Role="NhanVienTheoDoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhiemVuNhanVienTheoDoan">
+    <End Type="Model1.NhiemVu" Role="NhiemVu" Multiplicity="1" />
+    <End Type="Model1.NhanVienTheoDoan" Role="NhanVienTheoDoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhiemVu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idNhiemVu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhanVienTheoDoanDoanKhach">
+    <End Type="Model1.NhanVienTheoDoan" Role="NhanVienTheoDoan" Multiplicity="*" />
+    <End Type="Model1.DoanKhach" Role="DoanKhach" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idDoanKhach" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

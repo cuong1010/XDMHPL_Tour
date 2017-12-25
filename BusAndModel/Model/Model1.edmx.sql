@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/24/2017 14:27:56
--- Generated from EDMX file: C:\Users\MyPC\Documents\XDMHPL_Tour\BusAndModel\Model\Model1.edmx
+-- Date Created: 12/25/2017 00:34:12
+-- Generated from EDMX file: C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\BusAndModel\Model\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [QLtour];
+USE [QLTour];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -28,6 +28,15 @@ IF OBJECT_ID(N'[dbo].[FK_KhachHangDSKhachTheoDoan]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_LoaiDLTour]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tours] DROP CONSTRAINT [FK_LoaiDLTour];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NhanVienNhanVienTheoDoan]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NhanVienTheoDoans] DROP CONSTRAINT [FK_NhanVienNhanVienTheoDoan];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NhanVienTheoDoanDoanKhach]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NhanVienTheoDoans] DROP CONSTRAINT [FK_NhanVienTheoDoanDoanKhach];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NhiemVuNhanVienTheoDoan]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NhanVienTheoDoans] DROP CONSTRAINT [FK_NhiemVuNhanVienTheoDoan];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TinhThanhDiaDiem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DiaDiems] DROP CONSTRAINT [FK_TinhThanhDiaDiem];
@@ -132,7 +141,8 @@ GO
 CREATE TABLE [dbo].[CTTours] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [TourId] int  NOT NULL,
-    [DiaDiemId] int  NOT NULL
+    [DiaDiemId] int  NOT NULL,
+    [ThuTuThamQuan] int  NOT NULL
 );
 GO
 

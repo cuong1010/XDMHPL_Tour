@@ -138,6 +138,7 @@ namespace WinTour
             refeshDD();
             // load ds tỉnh thành
             cbDSTinhTour.Items.Clear();
+            if(dstinh[dstinh.Count-1]!=null)
             foreach (var i in dstinh)
             {
                 cbDSTinhTour.Items.Add(i.TenTinh);
@@ -157,15 +158,20 @@ namespace WinTour
             int vttinh = cbDSTinhTour.SelectedIndex;
             foreach (var i in dstinh[vttinh].DiaDiems)
                 cbDSDDTuor.Items.Add(i.TenDiaDiem);
-            //foreach (var i in dsdiadiem)
-            //    if (i.TinhThanh.TenTinh.Equals(dstinh[vttinh].TenTinh)) cbDSDDTuor.Items.Add(i.TenDiaDiem);
+           
         }
 
         private void cbDSDDTuor_SelectedIndexChanged(object sender, EventArgs e)
         {
             var row = new DataGridViewRow();
             row.CreateCells(GridDDTour);
-            int stt = GridDDTour.RowCount + 1;
+            int vt = cbDSTinhTour.SelectedIndex;
+            var dsdd = dstinh[vt].DiaDiems.ToList();
+            row.Cells[0].Value = GridDDTour.RowCount + 1;            
+            row.Cells[1].Value = dstinh[vt].TenTinh;
+            row.Cells[2].Value = dsdd[cbDSDDTuor.SelectedIndex].TenDiaDiem;
+            row.Cells[3].Value = "Hủy";
+            GridDDTour.Rows.Add(row);
         }
     }
 }

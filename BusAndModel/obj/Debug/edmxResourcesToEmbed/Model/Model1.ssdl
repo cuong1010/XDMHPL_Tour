@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="Model1StoreContainer">
     <EntitySet Name="Tours" EntityType="Model1.Store.Tours" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LoaiDLs" EntityType="Model1.Store.LoaiDLs" store:Type="Tables" Schema="dbo" />
@@ -43,6 +43,18 @@
     </AssociationSet>
     <AssociationSet Name="TourDoanKhach" Association="Model1.Store.TourDoanKhach">
       <End Role="Tour" EntitySet="Tours" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+    <AssociationSet Name="NhanVienNhanVienTheoDoan" Association="Model1.Store.NhanVienNhanVienTheoDoan">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="NhiemVuNhanVienTheoDoan" Association="Model1.Store.NhiemVuNhanVienTheoDoan">
+      <End Role="NhiemVu" EntitySet="NhiemVus" />
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="NhanVienTheoDoanDoanKhach" Association="Model1.Store.NhanVienTheoDoanDoanKhach">
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
       <End Role="DoanKhach" EntitySet="DoanKhaches" />
     </AssociationSet>
   </EntityContainer>
@@ -94,6 +106,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TourId" Type="int" Nullable="false" />
     <Property Name="DiaDiemId" Type="int" Nullable="false" />
+    <Property Name="ThuTuThamQuan" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="KhachHangs">
     <Key>
@@ -245,6 +258,42 @@
       </Principal>
       <Dependent Role="DoanKhach">
         <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhanVienNhanVienTheoDoan">
+    <End Role="NhanVien" Type="Model1.Store.NhanViens" Multiplicity="1" />
+    <End Role="NhanVienTheoDoan" Type="Model1.Store.NhanVienTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhiemVuNhanVienTheoDoan">
+    <End Role="NhiemVu" Type="Model1.Store.NhiemVus" Multiplicity="1" />
+    <End Role="NhanVienTheoDoan" Type="Model1.Store.NhanVienTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhiemVu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idNhiemVu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhanVienTheoDoanDoanKhach">
+    <End Role="NhanVienTheoDoan" Type="Model1.Store.NhanVienTheoDoans" Multiplicity="*" />
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idDoanKhach" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
