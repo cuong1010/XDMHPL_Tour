@@ -4,304 +4,305 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CTTours">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TourId" Type="int" Nullable="false" />
-          <Property Name="DiaDiemId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DiaDiems">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenDiaDiem" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="TinhThanhId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DoanKhaches">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="NgayKhoiHanh" Type="datetime" Nullable="false" />
-          <Property Name="NgayKetThuc" Type="datetime" Nullable="false" />
-          <Property Name="TongKS" Type="int" />
-          <Property Name="TongAn" Type="int" />
-          <Property Name="TongPT" Type="int" />
-          <Property Name="TongKhac" Type="int" />
-          <Property Name="TourId" Type="int" Nullable="false" />
-          <Property Name="SLCho" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DSKhachTheoDoans">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DoanKhachId" Type="int" Nullable="false" />
-          <Property Name="KhachHangId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="GiaTours">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Gia" Type="int" Nullable="false" />
-          <Property Name="NgayCapNhat" Type="datetime" Nullable="false" />
-          <Property Name="TourId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="KhachHangs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HoTen" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CMND" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SDT" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="GioiTinh" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="LoaiDLs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NhanViens">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenNhanVien" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NhanVienTheoDoans">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idNhiemVu" Type="int" Nullable="false" />
-          <Property Name="idNhanVien" Type="int" Nullable="false" />
-          <Property Name="idDoanKhach" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NhiemVus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenNhiemVu" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TinhThanhs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaTinh" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="TenTinh" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tours">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DacDiem" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LoaiDLId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_DiaDiemCTTour">
-          <End Role="DiaDiems" Type="Self.DiaDiems" Multiplicity="1" />
-          <End Role="CTTours" Type="Self.CTTours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DiaDiems">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CTTours">
-              <PropertyRef Name="DiaDiemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DoanKhachDSKhachTheoDoan">
-          <End Role="DoanKhaches" Type="Self.DoanKhaches" Multiplicity="1" />
-          <End Role="DSKhachTheoDoans" Type="Self.DSKhachTheoDoans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DoanKhaches">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DSKhachTheoDoans">
-              <PropertyRef Name="DoanKhachId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KhachHangDSKhachTheoDoan">
-          <End Role="KhachHangs" Type="Self.KhachHangs" Multiplicity="1" />
-          <End Role="DSKhachTheoDoans" Type="Self.DSKhachTheoDoans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHangs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DSKhachTheoDoans">
-              <PropertyRef Name="KhachHangId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoaiDLTour">
-          <End Role="LoaiDLs" Type="Self.LoaiDLs" Multiplicity="1" />
-          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoaiDLs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tours">
-              <PropertyRef Name="LoaiDLId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NhanVienNhanVienTheoDoan">
-          <End Role="NhanViens" Type="Self.NhanViens" Multiplicity="1" />
-          <End Role="NhanVienTheoDoans" Type="Self.NhanVienTheoDoans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NhanViens">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NhanVienTheoDoans">
-              <PropertyRef Name="idNhanVien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NhanVienTheoDoanDoanKhach">
-          <End Role="DoanKhaches" Type="Self.DoanKhaches" Multiplicity="1" />
-          <End Role="NhanVienTheoDoans" Type="Self.NhanVienTheoDoans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DoanKhaches">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NhanVienTheoDoans">
-              <PropertyRef Name="idDoanKhach" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NhiemVuNhanVienTheoDoan">
-          <End Role="NhiemVus" Type="Self.NhiemVus" Multiplicity="1" />
-          <End Role="NhanVienTheoDoans" Type="Self.NhanVienTheoDoans" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NhiemVus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NhanVienTheoDoans">
-              <PropertyRef Name="idNhiemVu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TinhThanhDiaDiem">
-          <End Role="TinhThanhs" Type="Self.TinhThanhs" Multiplicity="1" />
-          <End Role="DiaDiems" Type="Self.DiaDiems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TinhThanhs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DiaDiems">
-              <PropertyRef Name="TinhThanhId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TourCTTour">
-          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
-          <End Role="CTTours" Type="Self.CTTours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tours">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CTTours">
-              <PropertyRef Name="TourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TourDoanKhach">
-          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
-          <End Role="DoanKhaches" Type="Self.DoanKhaches" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tours">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DoanKhaches">
-              <PropertyRef Name="TourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TourGiaTour">
-          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
-          <End Role="GiaTours" Type="Self.GiaTours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tours">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GiaTours">
-              <PropertyRef Name="TourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Model1StoreContainer">
-          <EntitySet Name="CTTours" EntityType="Self.CTTours" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DiaDiems" EntityType="Self.DiaDiems" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DoanKhaches" EntityType="Self.DoanKhaches" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DSKhachTheoDoans" EntityType="Self.DSKhachTheoDoans" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GiaTours" EntityType="Self.GiaTours" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHangs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LoaiDLs" EntityType="Self.LoaiDLs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NhanViens" EntityType="Self.NhanViens" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NhanVienTheoDoans" EntityType="Self.NhanVienTheoDoans" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NhiemVus" EntityType="Self.NhiemVus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TinhThanhs" EntityType="Self.TinhThanhs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tours" EntityType="Self.Tours" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_DiaDiemCTTour" Association="Self.FK_DiaDiemCTTour">
-            <End Role="DiaDiems" EntitySet="DiaDiems" />
-            <End Role="CTTours" EntitySet="CTTours" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DoanKhachDSKhachTheoDoan" Association="Self.FK_DoanKhachDSKhachTheoDoan">
-            <End Role="DoanKhaches" EntitySet="DoanKhaches" />
-            <End Role="DSKhachTheoDoans" EntitySet="DSKhachTheoDoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KhachHangDSKhachTheoDoan" Association="Self.FK_KhachHangDSKhachTheoDoan">
-            <End Role="KhachHangs" EntitySet="KhachHangs" />
-            <End Role="DSKhachTheoDoans" EntitySet="DSKhachTheoDoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoaiDLTour" Association="Self.FK_LoaiDLTour">
-            <End Role="LoaiDLs" EntitySet="LoaiDLs" />
-            <End Role="Tours" EntitySet="Tours" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NhanVienNhanVienTheoDoan" Association="Self.FK_NhanVienNhanVienTheoDoan">
-            <End Role="NhanViens" EntitySet="NhanViens" />
-            <End Role="NhanVienTheoDoans" EntitySet="NhanVienTheoDoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NhanVienTheoDoanDoanKhach" Association="Self.FK_NhanVienTheoDoanDoanKhach">
-            <End Role="DoanKhaches" EntitySet="DoanKhaches" />
-            <End Role="NhanVienTheoDoans" EntitySet="NhanVienTheoDoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NhiemVuNhanVienTheoDoan" Association="Self.FK_NhiemVuNhanVienTheoDoan">
-            <End Role="NhiemVus" EntitySet="NhiemVus" />
-            <End Role="NhanVienTheoDoans" EntitySet="NhanVienTheoDoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TinhThanhDiaDiem" Association="Self.FK_TinhThanhDiaDiem">
-            <End Role="TinhThanhs" EntitySet="TinhThanhs" />
-            <End Role="DiaDiems" EntitySet="DiaDiems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TourCTTour" Association="Self.FK_TourCTTour">
-            <End Role="Tours" EntitySet="Tours" />
-            <End Role="CTTours" EntitySet="CTTours" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TourDoanKhach" Association="Self.FK_TourDoanKhach">
-            <End Role="Tours" EntitySet="Tours" />
-            <End Role="DoanKhaches" EntitySet="DoanKhaches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TourGiaTour" Association="Self.FK_TourGiaTour">
-            <End Role="Tours" EntitySet="Tours" />
-            <End Role="GiaTours" EntitySet="GiaTours" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Tours" EntityType="Model1.Store.Tours" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LoaiDLs" EntityType="Model1.Store.LoaiDLs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GiaTours" EntityType="Model1.Store.GiaTours" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DiaDiems" EntityType="Model1.Store.DiaDiems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TinhThanhs" EntityType="Model1.Store.TinhThanhs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CTTours" EntityType="Model1.Store.CTTours" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KhachHangs" EntityType="Model1.Store.KhachHangs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DoanKhaches" EntityType="Model1.Store.DoanKhaches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NhiemVus" EntityType="Model1.Store.NhiemVus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DSKhachTheoDoans" EntityType="Model1.Store.DSKhachTheoDoans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NhanViens" EntityType="Model1.Store.NhanViens" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NhanVienTheoDoans" EntityType="Model1.Store.NhanVienTheoDoans" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TinhThanhDiaDiem" Association="Model1.Store.TinhThanhDiaDiem">
+      <End Role="TinhThanh" EntitySet="TinhThanhs" />
+      <End Role="DiaDiem" EntitySet="DiaDiems" />
+    </AssociationSet>
+    <AssociationSet Name="LoaiDLTour" Association="Model1.Store.LoaiDLTour">
+      <End Role="LoaiDL" EntitySet="LoaiDLs" />
+      <End Role="Tour" EntitySet="Tours" />
+    </AssociationSet>
+    <AssociationSet Name="TourGiaTour" Association="Model1.Store.TourGiaTour">
+      <End Role="Tour" EntitySet="Tours" />
+      <End Role="GiaTour" EntitySet="GiaTours" />
+    </AssociationSet>
+    <AssociationSet Name="TourCTTour" Association="Model1.Store.TourCTTour">
+      <End Role="Tour" EntitySet="Tours" />
+      <End Role="CTTour" EntitySet="CTTours" />
+    </AssociationSet>
+    <AssociationSet Name="DiaDiemCTTour" Association="Model1.Store.DiaDiemCTTour">
+      <End Role="DiaDiem" EntitySet="DiaDiems" />
+      <End Role="CTTour" EntitySet="CTTours" />
+    </AssociationSet>
+    <AssociationSet Name="DoanKhachDSKhachTheoDoan" Association="Model1.Store.DoanKhachDSKhachTheoDoan">
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+      <End Role="DSKhachTheoDoan" EntitySet="DSKhachTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="KhachHangDSKhachTheoDoan" Association="Model1.Store.KhachHangDSKhachTheoDoan">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="DSKhachTheoDoan" EntitySet="DSKhachTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="TourDoanKhach" Association="Model1.Store.TourDoanKhach">
+      <End Role="Tour" EntitySet="Tours" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+    <AssociationSet Name="NhanVienNhanVienTheoDoan" Association="Model1.Store.NhanVienNhanVienTheoDoan">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="NhiemVuNhanVienTheoDoan" Association="Model1.Store.NhiemVuNhanVienTheoDoan">
+      <End Role="NhiemVu" EntitySet="NhiemVus" />
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="NhanVienTheoDoanDoanKhach" Association="Model1.Store.NhanVienTheoDoanDoanKhach">
+      <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DacDiem" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LoaiDLId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoaiDLs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GiaTours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gia" Type="int" Nullable="false" />
+    <Property Name="NgayCapNhat" Type="datetime" Nullable="false" />
+    <Property Name="TourId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiaDiems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDiaDiem" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TinhThanhId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TinhThanhs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaTinh" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TenTinh" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CTTours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TourId" Type="int" Nullable="false" />
+    <Property Name="DiaDiemId" Type="int" Nullable="false" />
+    <Property Name="ThuTuThamQuan" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KhachHangs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CMND" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SDT" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GioiTinh" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DoanKhaches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NgayKhoiHanh" Type="datetime" Nullable="false" />
+    <Property Name="NgayKetThuc" Type="datetime" Nullable="false" />
+    <Property Name="TongKS" Type="int" Nullable="true" />
+    <Property Name="TongAn" Type="int" Nullable="true" />
+    <Property Name="TongPT" Type="int" Nullable="true" />
+    <Property Name="TongKhac" Type="int" Nullable="true" />
+    <Property Name="TourId" Type="int" Nullable="false" />
+    <Property Name="SLCho" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NhiemVus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNhiemVu" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DSKhachTheoDoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DoanKhachId" Type="int" Nullable="false" />
+    <Property Name="KhachHangId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NhanViens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNhanVien" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NhanVienTheoDoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idNhiemVu" Type="int" Nullable="false" />
+    <Property Name="idNhanVien" Type="int" Nullable="false" />
+    <Property Name="idDoanKhach" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="TinhThanhDiaDiem">
+    <End Role="TinhThanh" Type="Model1.Store.TinhThanhs" Multiplicity="1" />
+    <End Role="DiaDiem" Type="Model1.Store.DiaDiems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhThanh">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DiaDiem">
+        <PropertyRef Name="TinhThanhId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LoaiDLTour">
+    <End Role="LoaiDL" Type="Model1.Store.LoaiDLs" Multiplicity="1" />
+    <End Role="Tour" Type="Model1.Store.Tours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiDL">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="LoaiDLId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TourGiaTour">
+    <End Role="Tour" Type="Model1.Store.Tours" Multiplicity="1" />
+    <End Role="GiaTour" Type="Model1.Store.GiaTours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GiaTour">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TourCTTour">
+    <End Role="Tour" Type="Model1.Store.Tours" Multiplicity="1" />
+    <End Role="CTTour" Type="Model1.Store.CTTours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CTTour">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DiaDiemCTTour">
+    <End Role="DiaDiem" Type="Model1.Store.DiaDiems" Multiplicity="1" />
+    <End Role="CTTour" Type="Model1.Store.CTTours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiaDiem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CTTour">
+        <PropertyRef Name="DiaDiemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoanKhachDSKhachTheoDoan">
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <End Role="DSKhachTheoDoan" Type="Model1.Store.DSKhachTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DSKhachTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KhachHangDSKhachTheoDoan">
+    <End Role="KhachHang" Type="Model1.Store.KhachHangs" Multiplicity="1" />
+    <End Role="DSKhachTheoDoan" Type="Model1.Store.DSKhachTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DSKhachTheoDoan">
+        <PropertyRef Name="KhachHangId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TourDoanKhach">
+    <End Role="Tour" Type="Model1.Store.Tours" Multiplicity="1" />
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoanKhach">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhanVienNhanVienTheoDoan">
+    <End Role="NhanVien" Type="Model1.Store.NhanViens" Multiplicity="1" />
+    <End Role="NhanVienTheoDoan" Type="Model1.Store.NhanVienTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhiemVuNhanVienTheoDoan">
+    <End Role="NhiemVu" Type="Model1.Store.NhiemVus" Multiplicity="1" />
+    <End Role="NhanVienTheoDoan" Type="Model1.Store.NhanVienTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhiemVu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idNhiemVu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NhanVienTheoDoanDoanKhach">
+    <End Role="NhanVienTheoDoan" Type="Model1.Store.NhanVienTheoDoans" Multiplicity="*" />
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVienTheoDoan">
+        <PropertyRef Name="idDoanKhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -458,6 +459,7 @@
           <Property Name="TourId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DiaDiem" Relationship="Model1.DiaDiemCTTour" FromRole="CTTour" ToRole="DiaDiem" />
           <Property Name="DiaDiemId" Type="Int32" Nullable="false" />
+          <Property Name="ThuTuThamQuan" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="TourCTTour">
           <End Type="Model1.Tour" Role="Tour" Multiplicity="1" />
@@ -681,6 +683,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TourId" ColumnName="TourId" />
           <ScalarProperty Name="DiaDiemId" ColumnName="DiaDiemId" />
+          <ScalarProperty Name="ThuTuThamQuan" ColumnName="ThuTuThamQuan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -53,6 +53,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TourId" ColumnName="TourId" />
           <ScalarProperty Name="DiaDiemId" ColumnName="DiaDiemId" />
+          <ScalarProperty Name="ThuTuThamQuan" ColumnName="ThuTuThamQuan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

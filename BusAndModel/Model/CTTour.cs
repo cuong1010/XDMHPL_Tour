@@ -17,6 +17,7 @@ namespace BusAndModel.Model
         public int Id { get; set; }
         public int TourId { get; set; }
         public int DiaDiemId { get; set; }
+        public int ThuTuThamQuan { get; set; }
     
         public virtual Tour Tour { get; set; }
         public virtual DiaDiem DiaDiem { get; set; }
