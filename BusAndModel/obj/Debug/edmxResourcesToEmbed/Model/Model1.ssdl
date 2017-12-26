@@ -13,6 +13,10 @@
     <EntitySet Name="DSKhachTheoDoans" EntityType="Model1.Store.DSKhachTheoDoans" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NhanViens" EntityType="Model1.Store.NhanViens" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NhanVienTheoDoans" EntityType="Model1.Store.NhanVienTheoDoans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KhachSanTheoDoans" EntityType="Model1.Store.KhachSanTheoDoans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhuongTienTheoDoans" EntityType="Model1.Store.PhuongTienTheoDoans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ChiPhiKhacTheoDoans" EntityType="Model1.Store.ChiPhiKhacTheoDoans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TienAnTheoDoans" EntityType="Model1.Store.TienAnTheoDoans" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="TinhThanhDiaDiem" Association="Model1.Store.TinhThanhDiaDiem">
       <End Role="TinhThanh" EntitySet="TinhThanhs" />
       <End Role="DiaDiem" EntitySet="DiaDiems" />
@@ -55,6 +59,22 @@
     </AssociationSet>
     <AssociationSet Name="NhanVienTheoDoanDoanKhach" Association="Model1.Store.NhanVienTheoDoanDoanKhach">
       <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+    <AssociationSet Name="KhachSanTheoDoanDoanKhach" Association="Model1.Store.KhachSanTheoDoanDoanKhach">
+      <End Role="KhachSanTheoDoan" EntitySet="KhachSanTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+    <AssociationSet Name="PhuongTienTheoDoanDoanKhach" Association="Model1.Store.PhuongTienTheoDoanDoanKhach">
+      <End Role="PhuongTienTheoDoan" EntitySet="PhuongTienTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+    <AssociationSet Name="DoanKhachChiPhiKhacTheoDoan" Association="Model1.Store.DoanKhachChiPhiKhacTheoDoan">
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+      <End Role="ChiPhiKhacTheoDoan" EntitySet="ChiPhiKhacTheoDoans" />
+    </AssociationSet>
+    <AssociationSet Name="TienAnTheoDoanDoanKhach" Association="Model1.Store.TienAnTheoDoanDoanKhach">
+      <End Role="TienAnTheoDoan" EntitySet="TienAnTheoDoans" />
       <End Role="DoanKhach" EntitySet="DoanKhaches" />
     </AssociationSet>
   </EntityContainer>
@@ -127,12 +147,10 @@
     <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NgayKhoiHanh" Type="datetime" Nullable="false" />
     <Property Name="NgayKetThuc" Type="datetime" Nullable="false" />
-    <Property Name="TongKS" Type="int" Nullable="true" />
-    <Property Name="TongAn" Type="int" Nullable="true" />
-    <Property Name="TongPT" Type="int" Nullable="true" />
-    <Property Name="TongKhac" Type="int" Nullable="true" />
     <Property Name="TourId" Type="int" Nullable="false" />
     <Property Name="SLCho" Type="int" Nullable="false" />
+    <Property Name="TongChiPhi" Type="int" Nullable="false" />
+    <Property Name="isEdit" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="NhiemVus">
     <Key>
@@ -164,6 +182,42 @@
     <Property Name="idNhiemVu" Type="int" Nullable="false" />
     <Property Name="idNhanVien" Type="int" Nullable="false" />
     <Property Name="idDoanKhach" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KhachSanTheoDoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenKs" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DoanKhachId" Type="int" Nullable="false" />
+    <Property Name="GiaTien" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhuongTienTheoDoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenPT" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DoanKhachId" Type="int" Nullable="false" />
+    <Property Name="GiaTien" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChiPhiKhacTheoDoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DoanKhachId" Type="int" Nullable="false" />
+    <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GiaTien" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TienAnTheoDoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenGoi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DoanKhachId" Type="int" Nullable="false" />
+    <Property Name="GiaTien" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="TinhThanhDiaDiem">
     <End Role="TinhThanh" Type="Model1.Store.TinhThanhs" Multiplicity="1" />
@@ -294,6 +348,54 @@
       </Principal>
       <Dependent Role="NhanVienTheoDoan">
         <PropertyRef Name="idDoanKhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KhachSanTheoDoanDoanKhach">
+    <End Role="KhachSanTheoDoan" Type="Model1.Store.KhachSanTheoDoans" Multiplicity="*" />
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KhachSanTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PhuongTienTheoDoanDoanKhach">
+    <End Role="PhuongTienTheoDoan" Type="Model1.Store.PhuongTienTheoDoans" Multiplicity="*" />
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhuongTienTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoanKhachChiPhiKhacTheoDoan">
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <End Role="ChiPhiKhacTheoDoan" Type="Model1.Store.ChiPhiKhacTheoDoans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ChiPhiKhacTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TienAnTheoDoanDoanKhach">
+    <End Role="TienAnTheoDoan" Type="Model1.Store.TienAnTheoDoans" Multiplicity="*" />
+    <End Role="DoanKhach" Type="Model1.Store.DoanKhaches" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TienAnTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

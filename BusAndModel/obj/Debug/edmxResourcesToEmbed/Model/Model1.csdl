@@ -57,6 +57,26 @@
       <End Role="NhanVienTheoDoan" EntitySet="NhanVienTheoDoans" />
       <End Role="DoanKhach" EntitySet="DoanKhaches" />
     </AssociationSet>
+    <EntitySet Name="KhachSanTheoDoans" EntityType="Model1.KhachSanTheoDoan" />
+    <AssociationSet Name="KhachSanTheoDoanDoanKhach" Association="Model1.KhachSanTheoDoanDoanKhach">
+      <End EntitySet="KhachSanTheoDoans" Role="KhachSanTheoDoan" />
+      <End EntitySet="DoanKhaches" Role="DoanKhach" />
+    </AssociationSet>
+    <EntitySet Name="PhuongTienTheoDoans" EntityType="Model1.PhuongTienTheoDoan" />
+    <AssociationSet Name="PhuongTienTheoDoanDoanKhach" Association="Model1.PhuongTienTheoDoanDoanKhach">
+      <End Role="PhuongTienTheoDoan" EntitySet="PhuongTienTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
+    <EntitySet Name="ChiPhiKhacTheoDoans" EntityType="Model1.ChiPhiKhacTheoDoan" />
+    <AssociationSet Name="DoanKhachChiPhiKhacTheoDoan" Association="Model1.DoanKhachChiPhiKhacTheoDoan">
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+      <End Role="ChiPhiKhacTheoDoan" EntitySet="ChiPhiKhacTheoDoans" />
+    </AssociationSet>
+    <EntitySet Name="TienAnTheoDoans" EntityType="Model1.TienAnTheoDoan" />
+    <AssociationSet Name="TienAnTheoDoanDoanKhach" Association="Model1.TienAnTheoDoanDoanKhach">
+      <End Role="TienAnTheoDoan" EntitySet="TienAnTheoDoans" />
+      <End Role="DoanKhach" EntitySet="DoanKhaches" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tour">
     <Key>
@@ -199,15 +219,17 @@
     <Property Name="TenGoi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="NgayKhoiHanh" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="TongKS" Type="Int32" Nullable="true" />
     <NavigationProperty Name="DSKhachTheoDoans" Relationship="Model1.DoanKhachDSKhachTheoDoan" FromRole="DoanKhach" ToRole="DSKhachTheoDoan" />
-    <Property Name="TongAn" Type="Int32" Nullable="true" />
-    <Property Name="TongPT" Type="Int32" Nullable="true" />
-    <Property Name="TongKhac" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Tour" Relationship="Model1.TourDoanKhach" FromRole="DoanKhach" ToRole="Tour" />
     <Property Name="TourId" Type="Int32" Nullable="false" />
     <Property Name="SLCho" Type="Int32" Nullable="false" />
     <NavigationProperty Name="NhanVienTheoDoan" Relationship="Model1.NhanVienTheoDoanDoanKhach" FromRole="DoanKhach" ToRole="NhanVienTheoDoan" />
+    <NavigationProperty Name="KhachSanTheoDoan" Relationship="Model1.KhachSanTheoDoanDoanKhach" FromRole="DoanKhach" ToRole="KhachSanTheoDoan" />
+    <NavigationProperty Name="PhuongTienTheoDoan" Relationship="Model1.PhuongTienTheoDoanDoanKhach" FromRole="DoanKhach" ToRole="PhuongTienTheoDoan" />
+    <NavigationProperty Name="ChiPhiKhacTheoDoans" Relationship="Model1.DoanKhachChiPhiKhacTheoDoan" FromRole="DoanKhach" ToRole="ChiPhiKhacTheoDoan" />
+    <Property Name="TongChiPhi" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TienAnTheoDoan" Relationship="Model1.TienAnTheoDoanDoanKhach" FromRole="DoanKhach" ToRole="TienAnTheoDoan" />
+    <Property Name="isEdit" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="NhiemVu">
     <Key>
@@ -316,6 +338,94 @@
       </Principal>
       <Dependent Role="NhanVienTheoDoan">
         <PropertyRef Name="idDoanKhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="KhachSanTheoDoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="TenKs" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DoanKhachId" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="DoanKhaches" Relationship="Model1.KhachSanTheoDoanDoanKhach" FromRole="KhachSanTheoDoan" ToRole="DoanKhach" />
+    <Property Name="GiaTien" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="KhachSanTheoDoanDoanKhach">
+    <End Type="Model1.KhachSanTheoDoan" Multiplicity="*" Role="KhachSanTheoDoan" />
+    <End Type="Model1.DoanKhach" Multiplicity="1" Role="DoanKhach" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KhachSanTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PhuongTienTheoDoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenPT" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DoanKhachId" Type="Int32" Nullable="false" />
+    <Property Name="GiaTien" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DoanKhaches" Relationship="Model1.PhuongTienTheoDoanDoanKhach" FromRole="PhuongTienTheoDoan" ToRole="DoanKhach" />
+  </EntityType>
+  <Association Name="PhuongTienTheoDoanDoanKhach">
+    <End Type="Model1.PhuongTienTheoDoan" Role="PhuongTienTheoDoan" Multiplicity="*" />
+    <End Type="Model1.DoanKhach" Role="DoanKhach" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhuongTienTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ChiPhiKhacTheoDoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="DoanKhach" Relationship="Model1.DoanKhachChiPhiKhacTheoDoan" FromRole="ChiPhiKhacTheoDoan" ToRole="DoanKhach" />
+    <Property Name="DoanKhachId" Type="Int32" Nullable="false" />
+    <Property Name="TenGoi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="GiaTien" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="DoanKhachChiPhiKhacTheoDoan">
+    <End Type="Model1.DoanKhach" Role="DoanKhach" Multiplicity="1" />
+    <End Type="Model1.ChiPhiKhacTheoDoan" Role="ChiPhiKhacTheoDoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ChiPhiKhacTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TienAnTheoDoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenGoi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DoanKhachId" Type="Int32" Nullable="false" />
+    <Property Name="GiaTien" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DoanKhaches" Relationship="Model1.TienAnTheoDoanDoanKhach" FromRole="TienAnTheoDoan" ToRole="DoanKhach" />
+  </EntityType>
+  <Association Name="TienAnTheoDoanDoanKhach">
+    <End Type="Model1.TienAnTheoDoan" Role="TienAnTheoDoan" Multiplicity="*" />
+    <End Type="Model1.DoanKhach" Role="DoanKhach" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DoanKhach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TienAnTheoDoan">
+        <PropertyRef Name="DoanKhachId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

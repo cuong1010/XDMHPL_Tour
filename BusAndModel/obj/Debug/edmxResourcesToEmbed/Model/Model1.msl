@@ -76,12 +76,10 @@
           <ScalarProperty Name="TenGoi" ColumnName="TenGoi" />
           <ScalarProperty Name="NgayKhoiHanh" ColumnName="NgayKhoiHanh" />
           <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
-          <ScalarProperty Name="TongKS" ColumnName="TongKS" />
-          <ScalarProperty Name="TongAn" ColumnName="TongAn" />
-          <ScalarProperty Name="TongPT" ColumnName="TongPT" />
-          <ScalarProperty Name="TongKhac" ColumnName="TongKhac" />
           <ScalarProperty Name="TourId" ColumnName="TourId" />
           <ScalarProperty Name="SLCho" ColumnName="SLCho" />
+          <ScalarProperty Name="TongChiPhi" ColumnName="TongChiPhi" />
+          <ScalarProperty Name="isEdit" ColumnName="isEdit" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -117,6 +115,46 @@
           <ScalarProperty Name="idNhiemVu" ColumnName="idNhiemVu" />
           <ScalarProperty Name="idNhanVien" ColumnName="idNhanVien" />
           <ScalarProperty Name="idDoanKhach" ColumnName="idDoanKhach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KhachSanTheoDoans">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.KhachSanTheoDoan)">
+        <MappingFragment StoreEntitySet="KhachSanTheoDoans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenKs" ColumnName="TenKs" />
+          <ScalarProperty Name="DoanKhachId" ColumnName="DoanKhachId" />
+          <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhuongTienTheoDoans">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.PhuongTienTheoDoan)">
+        <MappingFragment StoreEntitySet="PhuongTienTheoDoans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenPT" ColumnName="TenPT" />
+          <ScalarProperty Name="DoanKhachId" ColumnName="DoanKhachId" />
+          <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChiPhiKhacTheoDoans">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ChiPhiKhacTheoDoan)">
+        <MappingFragment StoreEntitySet="ChiPhiKhacTheoDoans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DoanKhachId" ColumnName="DoanKhachId" />
+          <ScalarProperty Name="TenGoi" ColumnName="TenGoi" />
+          <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TienAnTheoDoans">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.TienAnTheoDoan)">
+        <MappingFragment StoreEntitySet="TienAnTheoDoans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenGoi" ColumnName="TenGoi" />
+          <ScalarProperty Name="DoanKhachId" ColumnName="DoanKhachId" />
+          <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

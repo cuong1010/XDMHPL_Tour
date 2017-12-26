@@ -313,23 +313,67 @@ namespace WinTour
             {
                 var kqtke = new BusTour().Thongkedoanhthu(frm, to);
                 if (kqtke == null) MessageBox.Show("Không có tour nào được tạo", "Thông Báo");
-
-                foreach (Series srs in chartDoanhThu.Series)
+                else
                 {
-                    srs.IsValueShownAsLabel = false;
-                    foreach (DataPoint point in srs.Points)
+                    var tke = (List<Tour>)db.Laytatcathongtin("Tours");
+                    for (int i = 0; i < tke.Count; i++)
                     {
-                        if (point.YValues.Length > 0 && (double)point.YValues.GetValue(0) != 0)
+                        chartDoanhThu.Series[0].Points.AddXY(tke[i].TenGoi, kqtke[i, 0]);
+                        
+                        chartDoanhThu.Series[1].Points.AddY(kqtke[i, 1]);                       
+                    }
+                    foreach (Series srs in chartDoanhThu.Series)
+                    {
+                        srs.IsValueShownAsLabel = false;
+                        foreach (DataPoint point in srs.Points)
                         {
-                            point.IsValueShownAsLabel = true;
+                            if (point.YValues.Length > 0 && (double)point.YValues.GetValue(0) != 0)
+                            {
+                                point.IsValueShownAsLabel = true;
+                            }
                         }
                     }
                 }
+                
             }
         }
         private void btnTKHD_Click(object sender, EventArgs e)
         {
+            foreach (var series in chartHD.Series)
+            {
+                series.Points.Clear();
+            }
 
+            DateTime frm = Convert.ToDateTime(TKHDfrom.Text);
+            DateTime to = Convert.ToDateTime(TKHDto.Text);
+            if (to < frm) MessageBox.Show("Ngày Sau Phải Lớn Hơn Ngày Trước", "Thông Báo");
+            else
+            {
+                var kqtke = new BusTour().ThongkeHD(frm, to);
+                if (kqtke == null) MessageBox.Show("Không có tour nào được tạo", "Thông Báo");
+                else
+                {
+                    var tke = (List<Tour>)db.Laytatcathongtin("Tours");
+                    for (int i = 0; i < tke.Count; i++)
+                    {
+                        chartHD.Series[0].Points.AddXY(tke[i].TenGoi, kqtke[i, 0]);                        
+                        chartHD.Series[1].Points.AddY(kqtke[i, 1]);
+                        chartHD.Series[2].Points.AddY(kqtke[i, 2]);
+                    }
+                    foreach (Series srs in chartHD.Series)
+                    {
+                        srs.IsValueShownAsLabel = false;
+                        foreach (DataPoint point in srs.Points)
+                        {
+                            if (point.YValues.Length > 0 && (double)point.YValues.GetValue(0) != 0)
+                            {
+                                point.IsValueShownAsLabel = true;
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

@@ -172,12 +172,14 @@
     <Compile Include="BUS\DoanKhachBus.cs" />
     <Compile Include="BUS\KhachhangBus.cs" />
     <Compile Include="BUS\NhanVienBus.cs" />
+    <Compile Include="BUS\ThongKeBus.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DoanKhachesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,6 +187,8 @@
     <Compile Include="Models\DoanKhachViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NhanVienViewModel.cs" />
+    <Compile Include="Models\ThongKeTheoThoiGianViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -270,6 +274,11 @@
     <Content Include="Views\NhanViens\Index.cshtml" />
     <Content Include="Views\NhanViens\PhanCong.cshtml" />
     <Content Include="Views\NhanViens\PhanCongNV.cshtml" />
+    <Content Include="Views\ThongKe\DoanKhach.cshtml" />
+    <Content Include="Views\ThongKe\KhachSan.cshtml" />
+    <Content Include="Views\ThongKe\TienAn.cshtml" />
+    <Content Include="Views\ThongKe\PhuongTien.cshtml" />
+    <Content Include="Views\ThongKe\NhanVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

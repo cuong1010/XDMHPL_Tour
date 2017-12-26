@@ -1,5 +1,4 @@
-﻿@using BusAndModel.Model
-@model DoanKhach
+﻿@model WebTour.Models.CapNhatDoanKhachViewModel
 
 @{
     ViewBag.Title = "Cập Nhật Thông Tin";
@@ -12,12 +11,12 @@
 @using (Html.BeginForm("Edit", "DoanKhaches", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     <div class="box-header with-border">
-        <h3 class="box-title">Thêm thông tin hành khách</h3>
+        <h3 class="box-title">Cập Nhật Tiền Đoàn</h3>
         <div class="box-tools pull-right">
             <button type="submit" class="btn btn-box-tool">
                 <i class="fa fa-check" style="font-size:16px"></i>
             </button>
-            <span class="btn btn-box-tool" onclick="location.href='/KhachHangs/Index'">
+            <span class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Index'">
                 <i class="fa fa-times" style="font-size:16px"></i>
             </span>
         </div>
@@ -25,36 +24,57 @@
     <div class="box-body">
         <div class="row">
             <div><b class="text-danger">@ViewBag.error</b></div>
+            <div class="col-md-12"><b class="text-danger">Mỗi thông tin cách nhau bởi dấu ", ". Chỉ Có Thể Cập Nhật 1 lần Duy Nhất</b></div>
             @Html.AntiForgeryToken()
             <!-------------------------------------COL12------------------------------------>
             <div class="col-md-12">
                 <div class="form-group minHeight80">
-                    <label>Tổng Tiền Khách Sạn</label>
-                    @Html.EditorFor(model => model.TongKS, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Nhập số tiền..." } })
-                    @Html.ValidationMessageFor(model => model.TongKS, "", new { @class = "text-danger" })
+                    <label>Tên Khách Sạn Đã Đi</label>
+                    @Html.HiddenFor(model => model.maDoan)
+                    @Html.EditorFor(model => model.DSKhachSan, new { htmlAttributes = new { @class = "form-control", @placeholder = "Khách Sạn A, Khách Sạn B, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSKhachSan, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
-                    <label>Tổng Tiền Ăn</label>
-                    @Html.EditorFor(model => model.TongAn, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Nhập số tiền..." } })
-                    @Html.ValidationMessageFor(model => model.TongAn, "", new { @class = "text-danger" })
-                    
-                </div>
+                    <label>Tổng Tiền Từng Khách Sạn</label>
+                    @Html.EditorFor(model => model.DSTienKS, new { htmlAttributes = new { @class = "form-control", @placeholder = "10000, 50000, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSTienKS, "", new { @class = "text-danger" })
 
+                </div>
+                <div class="form-group minHeight80">
+                    <label>Tên Các Nơi Ăn</label>
+                    @Html.EditorFor(model => model.DSAn, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mua Đồ A, Bể Bánh Xe, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSAn, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group minHeight80">
+                    <label>Tiền Ăn Từng Nơi</label>
+                    @Html.EditorFor(model => model.DSTienAn, new { htmlAttributes = new { @class = "form-control", @placeholder = "50000, 30000, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSTienAn, "", new { @class = "text-danger" })
+                </div>
                 <div class="form-group">
-                    <label>Tổng Tiền Phương Tiện</label>
-                    @Html.EditorFor(model => model.TongPT, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Nhập số tiền..." } })
-                    @Html.ValidationMessageFor(model => model.TongPT, "", new { @class = "text-danger" })
+                    <label>Tên Phương Tiện Sử Dụng</label>
+                    @Html.EditorFor(model => model.DSPhuongTien, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phương Tiện A, Phương Tiện B..." } })
+                    @Html.ValidationMessageFor(model => model.DSPhuongTien, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group minHeight80">
-                    <label>Tiền Khác</label>
-                    @Html.EditorFor(model => model.TongKhac, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Nhập số tiền..." } })
-                    @Html.ValidationMessageFor(model => model.TongKhac, "", new { @class = "text-danger" })
+                    <label>Tổng Tiền Từng Phương Tiện</label>
+                    @Html.EditorFor(model => model.DSTienPT, new { htmlAttributes = new { @class = "form-control", @placeholder = "50000, 30000, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSTienPT, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group minHeight80">
+                    <label>Tên Các Chi Phí Khác</label>
+                    @Html.EditorFor(model => model.DSKhac, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mua Đồ A, Bể Bánh Xe, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSKhac, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group minHeight80">
+                    <label>Tổng Tiền Từng Chi Phí Khác</label>
+                    @Html.EditorFor(model => model.DSTienKhac, new { htmlAttributes = new { @class = "form-control", @placeholder = "50000, 30000, ..." } })
+                    @Html.ValidationMessageFor(model => model.DSTienKhac, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group minHeight80">
                     <button type="submit" class="btn btn-box-tool">Cập Nhật</button>
-</div>
+                </div>
 
 
             </div>
