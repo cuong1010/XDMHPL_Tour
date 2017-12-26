@@ -31,11 +31,28 @@ namespace WebTour.Models
         public int soluong { get; set; }
         public List<KhachHang> danhsachkhach { get; set; }
         public List<ThongTinNhanVien> nhanvien { get; set; }
+        public List<KhachSanTheoDoan> dstienKs { get; set; }
+        public List<ChiPhiKhacTheoDoan> dstienkhac { get; set; }
+        public List<PhuongTienTheoDoan> dstienpt { get; set; }
+        public List<TienAnTheoDoan> dstienan { get; set; }
+        public bool isEdit { get; set; }
     }
     public class ThongTinNhanVien
     {
         public String tenNV { get; set; }
         public String ChucVu { get; set; }
+    }
+    public class CapNhatDoanKhachViewModel
+    {
+        public int maDoan { get; set; }
+        public String DSKhachSan { get; set; }
+        public String DSTienKS { get; set; }
+        public String DSPhuongTien { get; set; }
+        public String DSTienPT { get; set; }
+        public String DSKhac { get; set; }
+        public String DSTienKhac { get; set; }
+        public String DSAn { get; set; }
+        public String DSTienAn { get; set; }
     }
     
 }

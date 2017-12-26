@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/25/2017 00:34:12
--- Generated from EDMX file: C:\Users\PC\Documents\Visual Studio 2015\Projects\XDMHPL_Tour\QLTour\BusAndModel\Model\Model1.edmx
+-- Date Created: 12/26/2017 13:10:50
+-- Generated from EDMX file: C:\Users\MyPC\Documents\XDMHPL_Tour\BusAndModel\Model\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [QLTour];
+USE [QLtour];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -20,11 +20,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_DiaDiemCTTour]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CTTours] DROP CONSTRAINT [FK_DiaDiemCTTour];
 GO
+IF OBJECT_ID(N'[dbo].[FK_DoanKhachChiPhiKhacTheoDoan]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ChiPhiKhacTheoDoans] DROP CONSTRAINT [FK_DoanKhachChiPhiKhacTheoDoan];
+GO
 IF OBJECT_ID(N'[dbo].[FK_DoanKhachDSKhachTheoDoan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DSKhachTheoDoans] DROP CONSTRAINT [FK_DoanKhachDSKhachTheoDoan];
 GO
 IF OBJECT_ID(N'[dbo].[FK_KhachHangDSKhachTheoDoan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DSKhachTheoDoans] DROP CONSTRAINT [FK_KhachHangDSKhachTheoDoan];
+GO
+IF OBJECT_ID(N'[dbo].[FK_KhachSanTheoDoanDoanKhach]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[KhachSanTheoDoans] DROP CONSTRAINT [FK_KhachSanTheoDoanDoanKhach];
 GO
 IF OBJECT_ID(N'[dbo].[FK_LoaiDLTour]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tours] DROP CONSTRAINT [FK_LoaiDLTour];
@@ -37,6 +43,12 @@ IF OBJECT_ID(N'[dbo].[FK_NhanVienTheoDoanDoanKhach]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_NhiemVuNhanVienTheoDoan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NhanVienTheoDoans] DROP CONSTRAINT [FK_NhiemVuNhanVienTheoDoan];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PhuongTienTheoDoanDoanKhach]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PhuongTienTheoDoans] DROP CONSTRAINT [FK_PhuongTienTheoDoanDoanKhach];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TienAnTheoDoanDoanKhach]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TienAnTheoDoans] DROP CONSTRAINT [FK_TienAnTheoDoanDoanKhach];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TinhThanhDiaDiem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DiaDiems] DROP CONSTRAINT [FK_TinhThanhDiaDiem];
@@ -58,6 +70,9 @@ GO
 IF OBJECT_ID(N'[dbo].[CTTours]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CTTours];
 GO
+IF OBJECT_ID(N'[dbo].[ChiPhiKhacTheoDoans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ChiPhiKhacTheoDoans];
+GO
 IF OBJECT_ID(N'[dbo].[DiaDiems]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DiaDiems];
 GO
@@ -73,6 +88,9 @@ GO
 IF OBJECT_ID(N'[dbo].[KhachHangs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[KhachHangs];
 GO
+IF OBJECT_ID(N'[dbo].[KhachSanTheoDoans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KhachSanTheoDoans];
+GO
 IF OBJECT_ID(N'[dbo].[LoaiDLs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[LoaiDLs];
 GO
@@ -84,6 +102,12 @@ IF OBJECT_ID(N'[dbo].[NhanVienTheoDoans]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[NhiemVus]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NhiemVus];
+GO
+IF OBJECT_ID(N'[dbo].[PhuongTienTheoDoans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PhuongTienTheoDoans];
+GO
+IF OBJECT_ID(N'[dbo].[TienAnTheoDoans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TienAnTheoDoans];
 GO
 IF OBJECT_ID(N'[dbo].[TinhThanhs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TinhThanhs];
@@ -163,12 +187,10 @@ CREATE TABLE [dbo].[DoanKhaches] (
     [TenGoi] nvarchar(max)  NOT NULL,
     [NgayKhoiHanh] datetime  NOT NULL,
     [NgayKetThuc] datetime  NOT NULL,
-    [TongKS] int  NULL,
-    [TongAn] int  NULL,
-    [TongPT] int  NULL,
-    [TongKhac] int  NULL,
     [TourId] int  NOT NULL,
-    [SLCho] int  NOT NULL
+    [SLCho] int  NOT NULL,
+    [TongChiPhi] int  NOT NULL,
+    [isEdit] bit  NOT NULL
 );
 GO
 
@@ -200,6 +222,42 @@ CREATE TABLE [dbo].[NhanVienTheoDoans] (
     [idNhiemVu] int  NOT NULL,
     [idNhanVien] int  NOT NULL,
     [idDoanKhach] int  NOT NULL
+);
+GO
+
+-- Creating table 'KhachSanTheoDoans'
+CREATE TABLE [dbo].[KhachSanTheoDoans] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [TenKs] nvarchar(max)  NOT NULL,
+    [DoanKhachId] int  NOT NULL,
+    [GiaTien] int  NOT NULL
+);
+GO
+
+-- Creating table 'PhuongTienTheoDoans'
+CREATE TABLE [dbo].[PhuongTienTheoDoans] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [TenPT] nvarchar(max)  NOT NULL,
+    [DoanKhachId] int  NOT NULL,
+    [GiaTien] int  NOT NULL
+);
+GO
+
+-- Creating table 'ChiPhiKhacTheoDoans'
+CREATE TABLE [dbo].[ChiPhiKhacTheoDoans] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [DoanKhachId] int  NOT NULL,
+    [TenGoi] nvarchar(max)  NOT NULL,
+    [GiaTien] int  NOT NULL
+);
+GO
+
+-- Creating table 'TienAnTheoDoans'
+CREATE TABLE [dbo].[TienAnTheoDoans] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [TenGoi] nvarchar(max)  NOT NULL,
+    [DoanKhachId] int  NOT NULL,
+    [GiaTien] int  NOT NULL
 );
 GO
 
@@ -276,6 +334,30 @@ GO
 -- Creating primary key on [Id] in table 'NhanVienTheoDoans'
 ALTER TABLE [dbo].[NhanVienTheoDoans]
 ADD CONSTRAINT [PK_NhanVienTheoDoans]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'KhachSanTheoDoans'
+ALTER TABLE [dbo].[KhachSanTheoDoans]
+ADD CONSTRAINT [PK_KhachSanTheoDoans]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'PhuongTienTheoDoans'
+ALTER TABLE [dbo].[PhuongTienTheoDoans]
+ADD CONSTRAINT [PK_PhuongTienTheoDoans]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ChiPhiKhacTheoDoans'
+ALTER TABLE [dbo].[ChiPhiKhacTheoDoans]
+ADD CONSTRAINT [PK_ChiPhiKhacTheoDoans]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'TienAnTheoDoans'
+ALTER TABLE [dbo].[TienAnTheoDoans]
+ADD CONSTRAINT [PK_TienAnTheoDoans]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -446,6 +528,66 @@ GO
 CREATE INDEX [IX_FK_NhanVienTheoDoanDoanKhach]
 ON [dbo].[NhanVienTheoDoans]
     ([idDoanKhach]);
+GO
+
+-- Creating foreign key on [DoanKhachId] in table 'KhachSanTheoDoans'
+ALTER TABLE [dbo].[KhachSanTheoDoans]
+ADD CONSTRAINT [FK_KhachSanTheoDoanDoanKhach]
+    FOREIGN KEY ([DoanKhachId])
+    REFERENCES [dbo].[DoanKhaches]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_KhachSanTheoDoanDoanKhach'
+CREATE INDEX [IX_FK_KhachSanTheoDoanDoanKhach]
+ON [dbo].[KhachSanTheoDoans]
+    ([DoanKhachId]);
+GO
+
+-- Creating foreign key on [DoanKhachId] in table 'PhuongTienTheoDoans'
+ALTER TABLE [dbo].[PhuongTienTheoDoans]
+ADD CONSTRAINT [FK_PhuongTienTheoDoanDoanKhach]
+    FOREIGN KEY ([DoanKhachId])
+    REFERENCES [dbo].[DoanKhaches]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PhuongTienTheoDoanDoanKhach'
+CREATE INDEX [IX_FK_PhuongTienTheoDoanDoanKhach]
+ON [dbo].[PhuongTienTheoDoans]
+    ([DoanKhachId]);
+GO
+
+-- Creating foreign key on [DoanKhachId] in table 'ChiPhiKhacTheoDoans'
+ALTER TABLE [dbo].[ChiPhiKhacTheoDoans]
+ADD CONSTRAINT [FK_DoanKhachChiPhiKhacTheoDoan]
+    FOREIGN KEY ([DoanKhachId])
+    REFERENCES [dbo].[DoanKhaches]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DoanKhachChiPhiKhacTheoDoan'
+CREATE INDEX [IX_FK_DoanKhachChiPhiKhacTheoDoan]
+ON [dbo].[ChiPhiKhacTheoDoans]
+    ([DoanKhachId]);
+GO
+
+-- Creating foreign key on [DoanKhachId] in table 'TienAnTheoDoans'
+ALTER TABLE [dbo].[TienAnTheoDoans]
+ADD CONSTRAINT [FK_TienAnTheoDoanDoanKhach]
+    FOREIGN KEY ([DoanKhachId])
+    REFERENCES [dbo].[DoanKhaches]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TienAnTheoDoanDoanKhach'
+CREATE INDEX [IX_FK_TienAnTheoDoanDoanKhach]
+ON [dbo].[TienAnTheoDoans]
+    ([DoanKhachId]);
 GO
 
 -- --------------------------------------------------

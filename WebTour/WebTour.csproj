@@ -188,7 +188,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NhanVienViewModel.cs" />
-    <Compile Include="Models\ThongKeDoanKhachViewModel.cs" />
+    <Compile Include="Models\ThongKeTheoThoiGianViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -275,6 +275,10 @@
     <Content Include="Views\NhanViens\PhanCong.cshtml" />
     <Content Include="Views\NhanViens\PhanCongNV.cshtml" />
     <Content Include="Views\ThongKe\DoanKhach.cshtml" />
+    <Content Include="Views\ThongKe\KhachSan.cshtml" />
+    <Content Include="Views\ThongKe\TienAn.cshtml" />
+    <Content Include="Views\ThongKe\PhuongTien.cshtml" />
+    <Content Include="Views\ThongKe\NhanVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,4 +19,14 @@ namespace WebTour.Models
         public String TenTour { get; set; }
         public String TenDoan { get; set; }
     }
+    public class ThongKeNhanVienViewModel
+    {
+        public int Id
+        {
+            get;
+            set;
+        }
+        public String TenNV { get; set; }
+        public int SoLan { get; set; }
+    }
 }

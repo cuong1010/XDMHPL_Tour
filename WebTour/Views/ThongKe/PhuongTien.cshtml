@@ -1,14 +1,14 @@
-﻿@model WebTour.Models.ThongKeTheoThoiGianViewModel<BusAndModel.Model.DoanKhach>
+﻿@model WebTour.Models.ThongKeTheoThoiGianViewModel<BusAndModel.Model.PhuongTienTheoDoan>
 
 @{
-    ViewBag.Title = "Thống Kê Đoàn Khách";
+    ViewBag.Title = "Thống Kê Phương Tiện";
 }
 
 <div class="box">
     <div class="box-header text-center">
         <h3>Thống Kê</h3>
     </div>
-    @using (Html.BeginForm("DoanKhach", "ThongKe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("PhuongTien", "ThongKe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         <div class="box-body">
             <div class="col-sm-6">
@@ -52,42 +52,38 @@
         @if (Model.danhsach != null)
         {
             <table id="example2" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Mã Đoàn</th>
-                    <th>Tên Đoàn</th>
-                    <th>Ngày Bắt Đầu</th>
-                    <th>Ngày Kết Thúc</th>
-                    <th>Tổng Chi phí</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model.danhsach)
-                {
+                <thead>
                     <tr>
-                        <td>@item.Id</td>
-                        <td>@item.TenGoi</td>
-                        <td>@item.NgayKhoiHanh.ToShortDateString()</td>
-                        <td>@item.NgayKetThuc.ToShortDateString()</td>
-                        <td><a href="/DoanKhaches/Details/@item.Id" title="Chi Tiết">@string.Format("{0:C}", @item.TongChiPhi)</a> </td>
-
+                        <th>Id</th>
+                        <th>Loại Phương Tiện</th>
+                        <th>Chi Phí Chi Trả</th>
                     </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Mã Đoàn</th>
-                    <th>Tên Đoàn</th>
-                    <th>Ngày Bắt Đầu</th>
-                    <th>Ngày Kết Thúc</th>
-                    <th>Tổng Chi phí</th>
-                </tr>
-            </tfoot>
-        </table>
-        }else
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.danhsach)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.TenPT</td>
+                            <td>@string.Format("{0:C}", @item.GiaTien) </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Loại Phương Tiện</th>
+                        <th>Chi Phí Chi Trả</th>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
         {
-            <b class="text-danger">Không Tìm Thấy</b>
+            <div class="col-sm-12"> <b class="text-danger">Không Tìm Thấy Thông Tin</b></div>
         }
     </div>
 </div>
