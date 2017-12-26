@@ -17,11 +17,7 @@
                     <th>Tên Đoàn</th>
                     <th>Ngày khởi hành</th>
                     <th>Ngày Kết Thúc</th>
-                    <th>Tổng Tiền Khách Sạn</th>
-                    <th>Tổng Tiền Ăn</th>
-                    <th>Tổng Tiền Phương Tiện</th>
-                    <th>Tổng Tiền Khác</th>
-                    <th>Tổng Cộng</th>
+                    <th>Tổng Chi Phí</th>
                     <th>Cập Nhật</th>
 
                 </tr>
@@ -36,35 +32,31 @@
                         <td>@item.TenGoi</td>
                         <td>@item.NgayKhoiHanh.ToShortDateString()</td>
                         <td>@item.NgayKetThuc.ToShortDateString()</td>
-                        <td>@string.Format("{0:C}",@item.TongKS)</td>
-                        <td>@string.Format("{0:C}", @item.TongAn)</td>
-                        <td>@string.Format("{0:C}", @item.TongPT)</td>
-                        <td>@string.Format("{0:C}", @item.TongKhac)</td>
-                        @{
+                        <td><a href="/DoanKhaches/Details/@item.Id" title="Chi Tiết">@string.Format("{0:C}", @item.TongChiPhi)</a></td>
 
-                            var tong = item.TongAn.Value+item.TongKhac.Value+item.TongKS.Value+item.TongPT.Value;
+
+                        @if (!@item.isEdit)
+                        {
+                            <td class="text-center">
+                                <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Edit/'+@item.Id">
+                                    <i class="fa fa-edit" style="font-size:15px"></i>
+                                </button>
+                            </td>    }else{
+                            <td></td>}
+                        </tr>
                         }
-                        <td>@string.Format("{0:C}", @tong)</td>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Mã Đoàn</th>
+                            <th>Tên Tour</th>
+                            <th>Tên Đoàn</th>
+                            <th>Ngày khởi hành</th>
+                            <th>Ngày Kết Thúc</th>
+                            <th>Tổng Chi Phí</th>
 
-                        <td class="text-center">
-                            <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Edit/'+@item.Id">
-                                <i class="fa fa-edit" style="font-size:15px"></i>
-                            </button>
-
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Mã Đoàn</th>
-                    <th>Tên Tour</th>
-                    <th>Tên Đoàn</th>
-                    <th>Thông tin Tour</th>
-                    <th>Số lượng còn lại</th>
-                    <th>Đăng ký khách</th>
-
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>

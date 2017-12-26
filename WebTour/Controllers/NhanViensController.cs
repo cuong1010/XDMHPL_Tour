@@ -28,12 +28,12 @@ namespace WebTour.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            if (nhanVien == null)
+            var nhanvien = bus.ThongTinNV(id);
+            if (nhanvien == null)
             {
                 return HttpNotFound();
             }
-            return View(nhanVien);
+            return View(nhanvien);
         }
 
         // GET: NhanViens/Create

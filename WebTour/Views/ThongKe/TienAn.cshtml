@@ -1,0 +1,89 @@
+﻿@model WebTour.Models.ThongKeTheoThoiGianViewModel<BusAndModel.Model.TienAnTheoDoan>
+
+@{
+    ViewBag.Title = "Thống Kê Tiền Ăn";
+}
+
+<div class="box">
+    <div class="box-header text-center">
+        <h3>Thống Kê</h3>
+    </div>
+    @using (Html.BeginForm("TienAn", "ThongKe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        <div class="box-body">
+            <div class="col-sm-6">
+                <label>
+                    Từ Ngày
+                </label>
+                <div class="input-group date" id='datetimepicker1'>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+                    @Html.EditorFor(model => model.from, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
+
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label>Đến Ngày</label>
+                <div class="input-group date" id='datetimepicker2'>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+                    @Html.EditorFor(model => model.to, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
+
+
+                </div>
+            </div>
+            <hr />
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn-info btn">
+                    Thống Kê
+                </button>
+            </div>
+        </div>}
+    <div class="box-header text-center">
+        <h4>Thông tin Thống Kê</h4>
+    </div>
+    <div class="box-body">
+        <div class="col-sm-12">
+            <h4 class="text-info">Tổng Tiền : @string.Format("{0:C}", Model.Tong)</h4>
+        </div>
+        @if (Model.danhsach != null)
+        {
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nơi Ăn</th>
+                        <th>Chi Phí Chi Trả</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.danhsach)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.TenGoi</td>
+                            <td>@string.Format("{0:C}", @item.GiaTien) </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nơi Ăn</th>
+                        <th>Chi Phí Chi Trả</th>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
+        {
+            <div class="col-sm-12"> <b class="text-danger">Không Tìm Thấy Thông Tin</b></div>
+        }
+    </div>
+</div>

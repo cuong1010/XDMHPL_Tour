@@ -11,7 +11,7 @@
     <div class="box-body">
         <div class="col-sm-12">
             <label>Tình Trạng: 
-            @if (Model.ngayKhoiHanh.Date < DateTime.Now.Date)
+            @if (Model.ngayKhoiHanh.Date > DateTime.Now.Date )
             {
                 <b class="text-info">Chưa khởi Hành</b>
             }else if(Model.ngayKetThuc.Date<DateTime.Now.Date)
@@ -80,10 +80,117 @@
             </table>
     </div>
     <div class="box-header text-center">
+        <h4>Chi Tiết Chi Phí</h4>
+    </div>
+    <div class="box-body">
+        <div class="box-header">
+            <h4>Khách Sạn</h4>
+        </div>
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-7">Tên Khách Sạn</thclass="col-md-4">
+                    <th class="col-md-2">Giá Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.dstienKs)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TenKs</td>
+                        <td>@string.Format("{0:C}", @item.GiaTien)</td>
+                    </tr>
+                }
+            </tbody>
+            
+        </table>
+    </div>
+    <div class="box-body">
+        <div class="box-header">
+            <h4>Chi Phí Ăn</h4>
+        </div>
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-7">Nơi Ăn</th>
+                    <th class="col-md-2">Giá Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.dstienan)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TenGoi</td>
+                        <td>@string.Format("{0:C}", @item.GiaTien)</td>
+                    </tr>
+                }
+            </tbody>
+            
+        </table>
+    </div>
+    <div class="box-body">
+        <div class="box-header">
+            <h4>Phương Tiện</h4>
+        </div>
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-7">Tên Phương Tiện</th>
+                    <th class="col-md-2">Giá Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.dstienpt)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TenPT</td>
+                        <td>@string.Format("{0:C}", @item.GiaTien)</td>
+                    </tr>
+                }
+            </tbody>
+            
+        </table>
+    </div>
+    <div class="box-body">
+        <div class="box-header">
+            <h4>Chi Phí Khác</h4>
+        </div>
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-7">Mô Tả</th>
+                    <th class="col-md-2">Giá Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.dstienkhac)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TenGoi</td>
+                        <td>@string.Format("{0:C}", @item.GiaTien)</td>
+                    </tr>
+                }
+            </tbody>
+        
+        </table>
+    </div>
+    <div class="box-header text-center">
         <h4>Danh Sách Nhân Viên</h4>
         <div class="box-tools pull-right">
             <span class="btn btn-box-tool" onclick="location.href='/NhanViens/PhanCong/@Model.maDoan'">
-                <i class="fa fa-plus" style="font-size:16px">Thêm Đoàn</i>
+                <i class="fa fa-plus" style="font-size:16px">Phân Nhân Viên</i>
             </span>
         </div>
     </div>
@@ -106,12 +213,7 @@
                     </tr>
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Họ Tên Nhân Viên</th>
-                    <th>Chức Vụ</th>
-                </tr>
-            </tfoot>
+       
         </table>
     </div>
 </div>

@@ -37,5 +37,9 @@ namespace BusAndModel.Model
         public virtual DbSet<DSKhachTheoDoan> DSKhachTheoDoans { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<NhanVienTheoDoan> NhanVienTheoDoans { get; set; }
+        public virtual DbSet<KhachSanTheoDoan> KhachSanTheoDoans { get; set; }
+        public virtual DbSet<PhuongTienTheoDoan> PhuongTienTheoDoans { get; set; }
+        public virtual DbSet<ChiPhiKhacTheoDoan> ChiPhiKhacTheoDoans { get; set; }
+        public virtual DbSet<TienAnTheoDoan> TienAnTheoDoans { get; set; }
     }
 }

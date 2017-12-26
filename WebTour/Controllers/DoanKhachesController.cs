@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusAndModel.Model;
 using BusAndModel.BUS;
+using WebTour.Models;
 
 namespace WebTour.Controllers
 {
@@ -65,10 +66,13 @@ namespace WebTour.Controllers
                 else
                 {
                     ViewBag.error = "Lỗi xảy ra!, Kiểm tra lại số lượng hoặc đã đăng ký vui lòng thử lại sau!";
-                    ViewBag.DoanKhachId = new SelectList(db.DoanKhaches, "Id", "TenGoi", dSKhachTheoDoan.DoanKhachId);
-                    ViewBag.KhachHangId = new SelectList(db.KhachHangs, "Id", "HoTen", dSKhachTheoDoan.KhachHangId);
-                    ViewBag.tenTour = bus.getTenTour(dSKhachTheoDoan.DoanKhachId);
-                    return View(dSKhachTheoDoan);
+                    DoanKhach doan = db.DoanKhaches.Find(dSKhachTheoDoan.Id);
+                    ViewBag.DoanKhachId = new SelectList(db.DoanKhaches, "Id", "TenGoi");
+                    ViewBag.KhachHangId = new SelectList(db.KhachHangs, "Id", "HoTen");
+                    ViewBag.tenTour = bus.getTenTour(dSKhachTheoDoan.Id);
+                    ViewBag.ngayKhoiHanh = doan.NgayKhoiHanh.Date.ToString();
+                    ViewBag.ngayKetThuc = doan.NgayKetThuc.Date.ToString();
+                    return View();
                 }
             }
             ViewBag.DoanKhachId = new SelectList(db.DoanKhaches, "Id", "TenGoi", dSKhachTheoDoan.DoanKhachId);
@@ -110,32 +114,26 @@ namespace WebTour.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DoanKhach doanKhach = db.DoanKhaches.Find(id);
-            if (doanKhach == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TourId = new SelectList(db.Tours, "Id", "TenGoi", doanKhach.TourId);
+            CapNhatDoanKhachViewModel doanKhach = new CapNhatDoanKhachViewModel();
+            doanKhach = bus.getThongTinChiPhi(id);
             return View(doanKhach);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TenGoi,NgayKhoiHanh,NgayKetThuc,TongKS,TongAn,TongPT,TongKhac,TourId,SLCho")] DoanKhach doanKhach)
+        public ActionResult Edit([Bind(Include = "maDoan,DSKhachSan,DSTienKS,DSAn,DSTienAn,DSPhuongTien,DSTienPT,DSKhac,DSTienKhac")] CapNhatDoanKhachViewModel doankhach)
         {
             if (ModelState.IsValid)
             {
-                String error=bus.CapNhatTien(doanKhach);
+                String error=bus.CapNhatTien(doankhach);
                 if (error != null)
                 {
                     ViewBag.error = error;
-                    ViewBag.TourId = new SelectList(db.Tours, "Id", "TenGoi");
                     return View();
                 }
                 return RedirectToAction("TienDoan");
             }
-            ViewBag.TourId = new SelectList(db.Tours, "Id", "TenGoi", doanKhach.TourId);
-            return View(doanKhach);
+            return View(doankhach);
         }
 
         // GET: DoanKhaches/Delete/5

@@ -49,7 +49,7 @@
                             </button>
 
                         </td>
-                        @if (@item.ngayKetThuc < DateTime.Now.Date)
+                        @if (@item.ngayKetThuc < DateTime.Now.Date && !@item.isEdit)
                         {
                             <td class="text-center">
                                 <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Edit/'+@item.maDoan">
