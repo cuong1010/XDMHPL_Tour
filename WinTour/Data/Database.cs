@@ -33,6 +33,8 @@ namespace WinTour
                 if (a.GetType().ToString().IndexOf("LoaiDL") > 1) db.LoaiDLs.Add((LoaiDL)a);
                 else
                     if (a.GetType().ToString().IndexOf("CTTour") > 1) db.CTTours.Add((CTTour)a);
+                else
+                    if (a.GetType().ToString().IndexOf("GiaTour") > 1) db.GiaTours.Add((GiaTour)a);
                 db.SaveChanges();
                 return 1;
             }
@@ -70,6 +72,12 @@ namespace WinTour
                 {
                     CTTour temp = (CTTour)a;
                     temp = db.CTTours.Where(s => s.Id == temp.Id).First();
+                    db.Entry(temp).CurrentValues.SetValues(a);
+                }
+                else if (a.GetType().ToString().IndexOf("GiaTour") > 1)
+                {
+                    GiaTour temp = (GiaTour)a;
+                    temp = db.GiaTours.Where(s => s.Id == temp.Id).First();
                     db.Entry(temp).CurrentValues.SetValues(a);
                 }
                 db.SaveChanges();               
