@@ -43,13 +43,19 @@
                         <td>@item.ngayKhoiHanh.ToShortDateString()</td>
                         <td>@item.ngayKetThuc.ToShortDateString()</td>
                         <td>@item.soluong</td>
-                        <td class="text-center">
-                            <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Dangky/'+@item.maDoan">
-                                <i class="fa fa-plus" style="font-size:15px"></i>
-                            </button>
+                        @if (@item.ngayKetThuc.Date > DateTime.Now.Date)
+                        {
+                            <td class="text-center">
+                                <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Dangky/'+@item.maDoan">
+                                    <i class="fa fa-plus" style="font-size:15px"></i>
+                                </button>
 
-                        </td>
-                        @if (@item.ngayKetThuc < DateTime.Now.Date && !@item.isEdit)
+                            </td>}
+                        else
+                        {
+                            <td></td>
+                        }
+                        @if (@item.ngayKetThuc.Date < DateTime.Now.Date && !@item.isEdit)
                         {
                             <td class="text-center">
                                 <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Edit/'+@item.maDoan">
@@ -57,14 +63,22 @@
                                 </button>
 
                             </td>
-                        }else{ <td></td>
                         }
+                        else
+                        {
+                            <td></td>
+                        }
+                        @if (@item.ngayKetThuc.Date > DateTime.Now.Date)
+                        {
                         <td class="text-center">
                             <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Delete/'+@item.maDoan">
                                 <i class="fa fa-times" style="font-size:15px"></i>
                             </button>
 
-                        </td>
+                        </td>}
+                        else
+                        {
+                        <td></td>}
                         <td class="text-center">
                             <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Details/'+@item.maDoan">
                                 Chi Tiết
