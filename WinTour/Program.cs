@@ -16,7 +16,11 @@ namespace WinTour
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            DateTime frm = new DateTime(2017, 12, 26);
+            DateTime to = new DateTime(2017, 12, 30);
+            new BusTour().Thongkedoanhthu(frm, to);
+            //Application.Run(new Form1());
+            
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusAndModel.Model;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WinTour
 {
@@ -210,6 +211,7 @@ namespace WinTour
                 txtTenTour.Text = "";
                 txtDacDiem.Text = "";
                 txtGiaTour.Text = "";
+                GridDDTour.Rows.Clear();
                 MessageBox.Show("Tạo tour thành công");
             }
             else MessageBox.Show("Tạo tour thất bại");
@@ -219,6 +221,7 @@ namespace WinTour
         #region XemTour
         private void tabXemTour_Enter(object sender, EventArgs e)
         {
+            listTour.Items.Clear();
             dstour = (List<Tour>)db.Laytatcathongtin("Tours");
             foreach (var i in dstour)
                 listTour.Items.Add(i.TenGoi);
@@ -291,8 +294,42 @@ namespace WinTour
 
         private void btnGia_Click(object sender, EventArgs e)
         {
-            new frmGiaTour(dstour[listTour.SelectedIndex]).ShowDialog();
+            if(listTour.SelectedIndex>=0)
+            new frmGiaTour(dstour[listTour.SelectedIndex].Id).ShowDialog();
         }
         #endregion
+
+        private void btnTKDoanhThu_Click(object sender, EventArgs e)
+        {
+            foreach (var series in chartDoanhThu.Series)
+            {
+                series.Points.Clear();
+            }
+
+            DateTime frm = Convert.ToDateTime(doanhthufrom.Text);
+            DateTime to = Convert.ToDateTime(doanhthuto.Text);
+            if (to < frm) MessageBox.Show("Ngày Sau Phải Lớn Hơn Ngày Trước", "Thông Báo");
+            else
+            {
+                var kqtke = new BusTour().Thongkedoanhthu(frm, to);
+                if (kqtke == null) MessageBox.Show("Không có tour nào được tạo", "Thông Báo");
+
+                foreach (Series srs in chartDoanhThu.Series)
+                {
+                    srs.IsValueShownAsLabel = false;
+                    foreach (DataPoint point in srs.Points)
+                    {
+                        if (point.YValues.Length > 0 && (double)point.YValues.GetValue(0) != 0)
+                        {
+                            point.IsValueShownAsLabel = true;
+                        }
+                    }
+                }
+            }
+        }
+        private void btnTKHD_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

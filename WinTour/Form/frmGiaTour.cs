@@ -15,9 +15,13 @@ namespace WinTour
     {
         Database db = new Database();
         Tour tour;
-        public frmGiaTour(Tour a)
+        public frmGiaTour(int idtour)
         {
-            tour = a;
+            var dstour = (List<Tour>)db.Laytatcathongtin("Tours");
+            foreach (var i in dstour)
+            {
+                if (i.Id == idtour) tour = i;
+            }                   
             InitializeComponent();
             refeshGia();
         }
@@ -35,11 +39,11 @@ namespace WinTour
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+            
             GiaTour a = new GiaTour();
             a.Gia = Convert.ToInt32(txtGia.Text);
             a.NgayCapNhat = Convert.ToDateTime(txtNgay.Text);
             tour.GiaTours.Add(a);
-
             if (db.Sua(tour) > 0) MessageBox.Show("Thêm thành công");
             else MessageBox.Show("Thêm thất bại");
             refeshGia();
