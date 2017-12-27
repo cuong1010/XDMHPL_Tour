@@ -45,7 +45,7 @@ namespace WebTour.Controllers
         {
             ViewBag.idNhiemVu = new SelectList(db.NhiemVus, "Id", "TenNhiemVu");
             ViewBag.idNhanVien = new SelectList(db.NhanViens, "Id", "TenNhanVien");
-            ViewBag.idDoanKhach = new SelectList(db.DoanKhaches, "Id", "TenGoi");
+            ViewBag.idDoanKhach = new SelectList(db.DoanKhaches.Where(c=>c.NgayKetThuc>DateTime.Now), "Id", "TenGoi");
             return View();
         }
         public ActionResult PhanCong(int? id)

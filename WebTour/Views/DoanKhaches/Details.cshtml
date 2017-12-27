@@ -10,25 +10,28 @@
     </div>
     <div class="box-body">
         <div class="col-sm-12">
-            <label>Tình Trạng: 
-            @if (Model.ngayKhoiHanh.Date > DateTime.Now.Date )
-            {
-                <b class="text-info">Chưa khởi Hành</b>
-            }else if(Model.ngayKetThuc.Date<DateTime.Now.Date)
-            {
-                <b class="text-danger">Đã Kết Thúc</b>
-            }else
-            {
-                <b class="text-info">Đang Đi</b>
-            }
+            <label>
+                Tình Trạng:
+                @if (Model.ngayKhoiHanh.Date > DateTime.Now.Date)
+                {
+                    <b class="text-info">Chưa khởi Hành</b>
+                }
+                else if (Model.ngayKetThuc.Date < DateTime.Now.Date)
+                {
+                    <b class="text-danger">Đã Kết Thúc</b>
+                }
+                else
+                {
+                    <b class="text-info">Đang Đi</b>
+                }
             </label>
         </div>
 
-            <div class="col-sm-6">Ngày Khởi Hành: @Model.ngayKhoiHanh.ToShortDateString()</div>
-            <div class="col-sm-6">Ngày Kết Thúc: @Model.ngayKetThuc.ToShortDateString()</div>
+        <div class="col-sm-6">Ngày Khởi Hành: @Model.ngayKhoiHanh.ToShortDateString()</div>
+        <div class="col-sm-6">Ngày Kết Thúc: @Model.ngayKetThuc.ToShortDateString()</div>
         <div class="col-sm-12">
             <label>Số Lượng Còn Lại</label>
-            <input class="form-control"readonly="readonly" value="@Model.soluong"/>
+            <input class="form-control" readonly="readonly" value="@Model.soluong" />
         </div>
     </div>
     <div class="box-header text-center">
@@ -77,7 +80,7 @@
                     <th>Giới tính</th>
                 </tr>
             </tfoot>
-            </table>
+        </table>
     </div>
     <div class="box-header text-center">
         <h4>Chi Tiết Chi Phí</h4>
@@ -105,7 +108,7 @@
                     </tr>
                 }
             </tbody>
-            
+
         </table>
     </div>
     <div class="box-body">
@@ -131,7 +134,7 @@
                     </tr>
                 }
             </tbody>
-            
+
         </table>
     </div>
     <div class="box-body">
@@ -157,7 +160,7 @@
                     </tr>
                 }
             </tbody>
-            
+
         </table>
     </div>
     <div class="box-body">
@@ -183,16 +186,17 @@
                     </tr>
                 }
             </tbody>
-        
+
         </table>
     </div>
     <div class="box-header text-center">
         <h4>Danh Sách Nhân Viên</h4>
-        <div class="box-tools pull-right">
+        @if (Model.ngayKetThuc.Date > DateTime.Now.Date)
+        {<div class="box-tools pull-right">
             <span class="btn btn-box-tool" onclick="location.href='/NhanViens/PhanCong/@Model.maDoan'">
                 <i class="fa fa-plus" style="font-size:16px">Phân Nhân Viên</i>
             </span>
-        </div>
+        </div>}
     </div>
     <div class="box-body">
         <table id="example2" class="table table-bordered table-hover">
@@ -209,11 +213,11 @@
                     <tr>
                         <td>@item.tenNV</td>
                         <td>@item.ChucVu</td>
-                       
+
                     </tr>
                 }
             </tbody>
-       
+
         </table>
     </div>
 </div>

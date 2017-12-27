@@ -44,8 +44,10 @@ namespace WebTour.Controllers
         }
         public ActionResult DangKy(int? id)
         {
+            List<DoanKhach> list = new List<DoanKhach>();
             DoanKhach doan = db.DoanKhaches.Find(id);
-            ViewBag.DoanKhachId = new SelectList(db.DoanKhaches, "Id", "TenGoi");
+            list.Add(doan);
+            ViewBag.DoanKhachId = new SelectList(list, "Id", "TenGoi");
             ViewBag.KhachHangId = new SelectList(db.KhachHangs, "Id", "HoTen");
             ViewBag.tenTour = bus.getTenTour(id);
             ViewBag.ngayKhoiHanh = doan.NgayKhoiHanh.Date.ToString();
