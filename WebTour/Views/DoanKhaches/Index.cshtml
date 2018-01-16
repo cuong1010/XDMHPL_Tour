@@ -26,7 +26,7 @@
                     <th>Số lượng còn lại</th>
                     <th>Đăng ký khách</th>
                     <th>Cập nhật tiền đoàn</th>
-                    <th>Hủy Đoàn</th>
+                 
                     <th>Chi Tiết</th>
 
                 </tr>
@@ -68,17 +68,7 @@
                         {
                             <td></td>
                         }
-                        @if (@item.ngayKetThuc.Date > DateTime.Now.Date)
-                        {
-                        <td class="text-center">
-                            <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Delete/'+@item.maDoan">
-                                <i class="fa fa-times" style="font-size:15px"></i>
-                            </button>
-
-                        </td>}
-                        else
-                        {
-                        <td></td>}
+                        
                         <td class="text-center">
                             <button type="submit" class="btn btn-box-tool" onclick="location.href='/DoanKhaches/Details/'+@item.maDoan">
                                 Chi Tiết

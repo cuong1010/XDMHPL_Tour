@@ -81,6 +81,10 @@ namespace BusAndModel.BUS
                 {
                     return "Ngày khởi hành phải lớn hơn ngày hiện hành!!!";
                 }
+                if (doan.NgayKhoiHanh.Date > doan.NgayKetThuc.Date)
+                {
+                    return "Ngày khởi hành phải bé hơn ngày kết thúc !!!!";
+                }
                 db.DoanKhaches.Add(doan);
                 db.SaveChanges();
                 return null;
